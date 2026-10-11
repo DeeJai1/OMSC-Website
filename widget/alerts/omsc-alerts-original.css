@@ -1,0 +1,210 @@
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+
+            margin: 0;
+
+            overflow: hidden;
+
+            background: transparent;
+        }
+
+        #alerts-stage {
+            position: relative;
+
+            width: 100%;
+            height: 100%;
+
+            overflow: hidden;
+
+            background: transparent;
+        }
+
+        .alerts-presentation {
+            position: absolute;
+
+            pointer-events: none;
+        }
+
+        .alerts-presentation.position-center {
+            top: 50%;
+            left: 50%;
+
+            transform:
+                translate(
+                    -50%,
+                    -50%);
+        }
+
+        .alerts-presentation.position-top-left {
+            top: 0;
+            left: 0;
+        }
+
+        .alerts-presentation.position-top-right {
+            top: 0;
+            right: 0;
+        }
+
+        .alerts-presentation.position-bottom-left {
+            bottom: 0;
+            left: 0;
+        }
+
+        .alerts-presentation.position-bottom-right {
+            right: 0;
+            bottom: 0;
+        }
+
+        .alerts-presentation-inner {
+            position: relative;
+
+            width: 100%;
+            height: 100%;
+        }
+
+        .alerts-presentation canvas.alert-chroma-canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            background: transparent;
+        }
+
+        .alerts-presentation video {
+            display: block;
+
+            width: 100%;
+            height: 100%;
+
+            object-fit: contain;
+
+            background: transparent;
+        }
+
+        .alerts-caption {
+            position: absolute;
+
+            left: 50%;
+            bottom: 5%;
+
+            max-width: 90%;
+
+            padding: 10px 18px;
+
+            transform:
+                translateX(-50%);
+
+            color: #FFFFFF;
+
+            background:
+                rgba(0, 0, 0, 0.62);
+
+            border-radius: 10px;
+
+            font-family:
+                Inter,
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            font-size:
+                clamp(
+                    22px,
+                    2.2vw,
+                    44px);
+
+            font-weight: 800;
+
+            line-height: 1.15;
+
+            text-align: center;
+
+            text-shadow:
+                0 2px 5px
+                rgba(0, 0, 0, 0.75);
+        }
+
+        .alerts-presentation.sound-only
+        .alerts-caption {
+            top: 50%;
+            bottom: auto;
+
+            transform:
+                translate(
+                    -50%,
+                    -50%);
+        }
+
+        .animation-fade {
+            animation:
+                alertFadeIn
+                350ms
+                ease-out
+                both;
+        }
+
+        .animation-pop {
+            animation:
+                alertPopIn
+                380ms
+                cubic-bezier(
+                    0.18,
+                    0.89,
+                    0.32,
+                    1.28)
+                both;
+        }
+
+        .animation-slide-up {
+            animation:
+                alertSlideUp
+                420ms
+                ease-out
+                both;
+        }
+
+        @keyframes alertFadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes alertPopIn {
+            from {
+                opacity: 0;
+
+                transform:
+                    scale(0.78);
+            }
+
+            to {
+                opacity: 1;
+
+                transform:
+                    scale(1);
+            }
+        }
+
+        @keyframes alertSlideUp {
+            from {
+                opacity: 0;
+
+                transform:
+                    translateY(70px);
+            }
+
+            to {
+                opacity: 1;
+
+                transform:
+                    translateY(0);
+            }
+        }
+    

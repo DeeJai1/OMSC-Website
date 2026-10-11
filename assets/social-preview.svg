@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+<defs>
+  <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#070d1a"/><stop offset="1" stop-color="#142148"/></linearGradient>
+  <linearGradient id="title" x1="0" x2="1"><stop stop-color="#b48bff"/><stop offset=".6" stop-color="#4b89ff"/><stop offset="1" stop-color="#ffab77"/></linearGradient>
+</defs>
+<rect width="1200" height="630" fill="url(#bg)"/>
+<circle cx="990" cy="180" r="250" fill="#764cdd" opacity=".12"/>
+<circle cx="160" cy="520" r="270" fill="#337aff" opacity=".09"/>
+<text x="70" y="118" font-family="Arial,sans-serif" font-size="44" font-weight="750" fill="#fff">OLDMAN STREAM COMPANION</text>
+<text x="70" y="271" font-family="Arial,sans-serif" font-size="62" font-weight="750" fill="#fff">Your stream has enough</text>
+<text x="70" y="353" font-family="Arial,sans-serif" font-size="66" font-weight="750" fill="url(#title)">moving parts already.</text>
+<text x="70" y="433" font-family="Arial,sans-serif" font-size="28" fill="#a9bbd4">Free. Local. Your computer. Your stream. Your tools. Your data.</text>
+<text x="70" y="478" font-family="Arial,sans-serif" font-size="28" fill="#a9bbd4">No external bot service. No monthly subscription.</text>
+<rect x="70" y="540" width="320" height="5" rx="3" fill="url(#title)"/>
+</svg>

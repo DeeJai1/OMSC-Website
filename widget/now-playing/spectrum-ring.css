@@ -1,0 +1,36 @@
+.sr-root{width:560px;height:180px;position:relative;display:flex;align-items:center;gap:25px;padding:15px 27px 15px 23px;overflow:hidden;border-radius:23px;color:var(--sr-text);background:radial-gradient(ellipse 260px 170px at 13% 55%,color-mix(in srgb,var(--sr-primary) 17%,transparent),transparent 86%),linear-gradient(120deg,color-mix(in srgb,var(--sr-panel) 86%,#202330),var(--sr-panel) 72%);border:1px solid #ffffff24;box-shadow:0 12px 42px #0008,0 0 24px color-mix(in srgb,var(--sr-primary) 11%,transparent)}
+.sr-root.transparent{background:none;border-color:transparent;box-shadow:none}
+.sr-root:after{content:"";position:absolute;pointer-events:none;inset:0;border-radius:inherit;background:linear-gradient(110deg,transparent 32%,#ffffff05 44%,transparent 53%);opacity:.65}
+.sr-root.transparent:after{display:none}
+.sr-orbit{position:relative;flex:0 0 147px;width:147px;height:147px;display:grid;place-items:center;filter:drop-shadow(0 0 calc(15px * var(--sr-glow)) color-mix(in srgb,var(--sr-primary) 40%,transparent))}
+.sr-orbit-svg{position:absolute;inset:0;height:100%;width:100%;overflow:visible;transform:rotate(-90deg)}
+.sr-ring-track{fill:none;stroke:#ffffff22;stroke-width:var(--sr-ring-size)}
+.sr-ring-progress{fill:none;stroke:url(#sr-ring-gradient);stroke-width:var(--sr-ring-size);stroke-linecap:round;stroke-dasharray:427.256;stroke-dashoffset:427.256;transition:stroke-dashoffset .12s linear;filter:drop-shadow(0 0 4px var(--sr-primary))}
+.sr-ring-inner{fill:none;stroke:color-mix(in srgb,var(--sr-secondary) 33%,transparent);stroke-width:1;stroke-dasharray:1 4}
+.sr-orbit-tick{stroke:var(--sr-secondary);stroke-linecap:round;transition:opacity .2s,stroke-width .2s}
+.sr-album-wrap{position:relative;width:110px;height:110px;overflow:hidden;border-radius:50%;border:2px solid #10101a;box-shadow:0 4px 18px #0009,inset 0 0 15px #0008;background:#151523}
+.sr-album-default{position:absolute;inset:0;background:radial-gradient(circle at 67% 30%,#ffe1af 0 2%,#ff9061 3%,#d64dc1 15%,transparent 32%),linear-gradient(155deg,#452363 5%,#3e1f66 40%,#11345e 61%,#090d26 95%)}
+.sr-album-default:before{content:"";position:absolute;left:-8%;right:-8%;top:49%;height:65%;background:repeating-linear-gradient(174deg,#a56bdf14 0 2px,transparent 2px 10px),linear-gradient(5deg,#090c25,#3b195c 62%,#d24ca8 100%);transform:rotate(-14deg);border-radius:50% 50% 0 0;box-shadow:0 -7px 16px #f665ee49}
+
+#sr-cover-image{width:100%;height:100%;object-fit:cover;display:none;position:relative;z-index:2}
+.sr-detail{position:relative;z-index:2;flex:1;min-width:0;align-self:stretch;padding:14px 0 10px;display:flex;flex-direction:column;justify-content:center}
+.sr-topline{display:flex;align-items:center;gap:8px;color:var(--sr-secondary);font-size:10px;font-weight:850;letter-spacing:.17em;margin-bottom:13px}
+.sr-topline .sr-mini-eq{display:flex;align-items:end;gap:2px;height:12px}
+.sr-mini-eq i{display:block;height:4px;width:2px;border-radius:2px;background:var(--sr-secondary);animation:sr-equalise .7s ease-in-out infinite alternate}
+.sr-mini-eq i:nth-child(2){height:10px;animation-delay:-.32s}.sr-mini-eq i:nth-child(3){height:6px;animation-delay:-.13s}.sr-mini-eq i:nth-child(4){height:9px;animation-delay:-.45s}
+.sr-root.paused .sr-mini-eq i{animation-play-state:paused}
+@keyframes sr-equalise{to{height:2px}}
+.sr-track{font-size:23px;font-weight:795;line-height:1.19;letter-spacing:-.035em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sr-artist{font-size:13px;color:color-mix(in srgb,var(--sr-text) 73%,transparent);font-weight:560;margin-top:8px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sr-album{font-size:10px;color:color-mix(in srgb,var(--sr-text) 44%,transparent);margin-top:4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sr-detail-bottom{display:flex;align-items:end;justify-content:space-between;margin-top:auto;gap:14px}
+.sr-status{display:flex;align-items:center;gap:7px;font-size:9px;letter-spacing:.12em;font-weight:800;color:var(--sr-secondary)}
+.sr-status i{width:5px;height:5px;border-radius:50%;background:var(--sr-secondary);box-shadow:0 0 9px var(--sr-secondary)}
+.sr-counter{text-align:right;font-size:23px;line-height:.9;font-weight:720;font-variant-numeric:tabular-nums;letter-spacing:-.04em}
+.sr-counter-caption{text-align:right;color:color-mix(in srgb,var(--sr-text) 54%,transparent);font-size:8px;font-weight:800;letter-spacing:.15em;margin-top:7px}
+
+/* OMSC_STAGE7C_MARKER: stand-alone Spectrum Ring from approved prototype v3 */
+.sr-root{position:absolute;top:10px;left:10px;z-index:6;display:none;
+--sr-primary:#b36bff;--sr-secondary:#39edeb;--sr-panel:#101119;--sr-text:#f7f5ff;
+--sr-ring-size:8;--sr-glow:.8;font-family:Inter,"Segoe UI",Arial,sans-serif;}
+.sr-root.sr-visible{display:flex}

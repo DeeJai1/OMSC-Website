@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1">
+
+    <title>OMSC Now Playing</title>
+
+    <link
+        rel="stylesheet"
+        href="./widget.css">
+    <link rel="stylesheet" href="./split-panel-duo.css">
+    <link rel="stylesheet" href="./spectrum-ring.css">
+    <link rel="stylesheet" href="./turntable-minimal.css">
+</head>
+
+<body>
+    <script src="/widget-site/demo-data.js"></script>
+
+    <div
+        id="now-playing-card"
+        class="now-playing-card">
+
+        <div
+            id="background-layer"
+            class="background-layer">
+        </div>
+
+        <div
+            id="watermark"
+            class="watermark embossed">
+            OMSC
+        </div>
+
+        <div
+            id="now-playing-label"
+            class="now-playing-label label-center">
+            NOW PLAYING
+        </div>
+
+        <div
+            id="widget-content"
+            class="widget-content image-left">
+
+            <div
+                id="artist-image-container"
+                class="artist-image-container">
+
+                <img
+                    id="artist-image"
+                    class="artist-image"
+                    alt="">
+            </div>
+
+            <div
+                class="track-text">
+
+                <div
+                    id="artist-name"
+                    class="artist-name">
+                    Artist
+                </div>
+
+                <div
+                    id="track-name"
+                    class="track-name">
+                    Track
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div
+            id="wave-progress"
+            class="wave-progress">
+
+            <svg
+                viewBox="0 0 1000 40"
+                preserveAspectRatio="none">
+
+                <defs>
+                    <clipPath id="wave-progress-clip">
+                        <rect
+                            id="wave-progress-clip-rect"
+                            x="0"
+                            y="0"
+                            width="0"
+                            height="40">
+                        </rect>
+                    </clipPath>
+                </defs>
+
+                <path
+                    id="wave-track"
+                    class="wave-track"
+                    d="">
+                </path>
+
+                <path
+                    id="wave-played"
+                    class="wave-played"
+                    d=""
+                    clip-path="url(#wave-progress-clip)">
+                </path>
+
+            </svg>
+
+        </div>
+
+
+        <div
+            id="straight-progress"
+            class="straight-progress off">
+
+            <div
+                id="straight-progress-played"
+                class="straight-progress-played">
+            </div>
+
+        </div>
+
+
+        <div
+            id="time-remaining"
+            class="time-remaining">
+            -0:00
+        </div>
+
+    </div>
+
+    <div
+        id="compact-reveal"
+        class="compact-reveal layout-inactive">
+
+        <div
+            id="compact-reveal-artwork-shell"
+            class="compact-reveal-artwork-shell">
+
+            <svg
+                class="compact-reveal-ring"
+                viewBox="0 0 120 120"
+                aria-hidden="true">
+
+                <circle
+                    id="compact-progress-track"
+                    class="compact-progress-track"
+                    cx="60"
+                    cy="60"
+                    r="52">
+                </circle>
+
+                <circle
+                    id="compact-progress-played"
+                    class="compact-progress-played"
+                    cx="60"
+                    cy="60"
+                    r="52">
+                </circle>
+
+            </svg>
+
+            <div class="compact-reveal-image-mask">
+
+                <img
+                    id="compact-artist-image"
+                    class="compact-artist-image"
+                    alt="">
+
+                <div
+                    id="compact-artwork-fallback"
+                    class="compact-artwork-fallback"
+                    aria-hidden="true">
+                    ♪
+                </div>
+
+            </div>
+
+        </div>
+
+        <div
+            id="compact-drawer-clip"
+            class="compact-drawer-clip">
+
+            <div
+                id="compact-drawer"
+                class="compact-drawer">
+
+                <div class="compact-reveal-copy">
+
+                    <div
+                        id="compact-artist-name"
+                        class="compact-artist-name">
+                        Artist
+                    </div>
+
+                    <div
+                        id="compact-track-name"
+                        class="compact-track-name">
+                        Track
+                    </div>
+
+                </div>
+
+                <div class="compact-reveal-brand">
+                    OMSC
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div
+        id="vinyl-player"
+        class="vinyl-player layout-inactive">
+
+        <div
+            id="vinyl-visual"
+            class="vinyl-visual">
+
+            <div
+                id="vinyl-record-shell"
+                class="vinyl-record-shell">
+
+                <div
+                    id="vinyl-record"
+                    class="vinyl-record">
+
+                    <div class="vinyl-record-label">
+
+                        <span>OMSC</span>
+
+                        <i aria-hidden="true">
+                        </i>
+
+                    </div>
+
+                </div>
+
+                <svg
+                    class="vinyl-progress-ring"
+                    viewBox="0 0 120 120"
+                    aria-hidden="true">
+
+                    <path
+                        id="vinyl-progress-track"
+                        class="vinyl-progress-track">
+                    </path>
+
+                    <path
+                        id="vinyl-progress-played"
+                        class="vinyl-progress-played"
+                        pathLength="1">
+                    </path>
+
+                </svg>
+
+            </div>
+
+            <div
+                id="vinyl-sleeve"
+                class="vinyl-sleeve">
+
+                <img
+                    id="vinyl-artist-image"
+                    class="vinyl-artist-image"
+                    alt="">
+
+                <div
+                    id="vinyl-artwork-fallback"
+                    class="vinyl-artwork-fallback"
+                    aria-hidden="true">
+                    ♪
+                </div>
+
+                <div
+                    class="vinyl-sleeve-sheen"
+                    aria-hidden="true">
+                </div>
+
+            </div>
+
+        </div>
+
+        <div
+            id="vinyl-info-panel"
+            class="vinyl-info-panel">
+
+            <div
+                id="vinyl-now-playing-label"
+                class="vinyl-now-playing-label">
+                NOW PLAYING
+            </div>
+
+            <div
+                id="vinyl-artist-name"
+                class="vinyl-artist-name">
+                Artist
+            </div>
+
+            <div
+                id="vinyl-track-name"
+                class="vinyl-track-name">
+                Track
+            </div>
+
+            <div
+                id="vinyl-album-name"
+                class="vinyl-album-name">
+                Album
+            </div>
+
+            <div class="vinyl-info-footer">
+
+                <span
+                    id="vinyl-time-remaining"
+                    class="vinyl-time-remaining">
+                    -0:00
+                </span>
+
+                <span class="vinyl-brand">
+                    OMSC
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div
+        id="mixtape-player"
+        class="mixtape-player layout-inactive">
+
+        <div class="mixtape-shell">
+
+            <div class="mixtape-label">
+
+                <div class="mixtape-artwork-shell">
+
+                    <img
+                        id="mixtape-album-image"
+                        class="mixtape-album-image"
+                        alt="">
+
+                    <div
+                        id="mixtape-artwork-fallback"
+                        class="mixtape-artwork-fallback"
+                        aria-hidden="true">
+                        ♪
+                    </div>
+
+                </div>
+
+                <div class="mixtape-copy">
+
+                    <div class="mixtape-label-heading">
+                        MIXTAPE
+                    </div>
+
+                    <div
+                        id="mixtape-artist-name"
+                        class="mixtape-artist-name">
+                        Artist
+                    </div>
+
+                    <div
+                        id="mixtape-track-name"
+                        class="mixtape-track-name">
+                        Track
+                    </div>
+
+                    <div
+                        id="mixtape-album-name"
+                        class="mixtape-album-name">
+                        Album
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="mixtape-window">
+
+                <div
+                    id="mixtape-left-spool"
+                    class="mixtape-spool mixtape-spool-left">
+
+                    <div class="mixtape-reel">
+                        <i></i>
+                        <i></i>
+                        <i></i>
+                    </div>
+
+                </div>
+
+                <div class="mixtape-tape-span">
+                </div>
+
+                <div
+                    id="mixtape-right-spool"
+                    class="mixtape-spool mixtape-spool-right">
+
+                    <div class="mixtape-reel">
+                        <i></i>
+                        <i></i>
+                        <i></i>
+                    </div>
+
+                </div>
+
+                <div class="mixtape-progress-track">
+
+                    <div
+                        id="mixtape-progress-played"
+                        class="mixtape-progress-played">
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="mixtape-footer">
+
+                <span>
+                    A
+                </span>
+
+                <span
+                    id="mixtape-time-remaining"
+                    class="mixtape-time-remaining">
+                    -0:00
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div
+        id="hi-fi-deck"
+        class="hi-fi-deck layout-inactive">
+
+        <div class="hi-fi-chassis">
+
+            <div class="hi-fi-top-strip">
+
+                <span class="hi-fi-model">
+                    DIGITAL STEREO COMPONENT
+                </span>
+
+                <div class="hi-fi-power-group">
+
+                    <span
+                        id="hi-fi-power-led"
+                        class="hi-fi-power-led">
+                    </span>
+
+                    <span>
+                        POWER
+                    </span>
+
+                </div>
+
+            </div>
+
+            <div class="hi-fi-main">
+
+                <div
+                    id="hi-fi-artwork-shell"
+                    class="hi-fi-artwork-shell">
+
+                    <img
+                        id="hi-fi-album-image"
+                        class="hi-fi-album-image"
+                        alt="">
+
+                    <div
+                        id="hi-fi-artwork-fallback"
+                        class="hi-fi-artwork-fallback"
+                        aria-hidden="true">
+                        ♪
+                    </div>
+
+                </div>
+
+                <div
+                    id="hi-fi-display"
+                    class="hi-fi-display">
+
+                    <div class="hi-fi-display-grid">
+                    </div>
+
+                    <div class="hi-fi-display-header">
+
+                        <span
+                            id="hi-fi-play-state"
+                            class="hi-fi-play-state">
+                            PLAY
+                        </span>
+
+                        <span
+                            id="hi-fi-time-remaining"
+                            class="hi-fi-time-remaining">
+                            -0:00
+                        </span>
+
+                    </div>
+
+                    <div
+                        id="hi-fi-artist-name"
+                        class="hi-fi-artist-name">
+                        Artist
+                    </div>
+
+                    <div
+                        id="hi-fi-track-name"
+                        class="hi-fi-track-name">
+                        Track
+                    </div>
+
+                    <div
+                        id="hi-fi-album-name"
+                        class="hi-fi-album-name">
+                        Album
+                    </div>
+
+                    <div class="hi-fi-progress-track">
+
+                        <div
+                            id="hi-fi-progress-played"
+                            class="hi-fi-progress-played">
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="hi-fi-transport">
+
+                    <div
+                        id="hi-fi-transport-wheel"
+                        class="hi-fi-transport-wheel"
+                        aria-hidden="true">
+
+                        <i></i>
+
+                    </div>
+
+                    <div class="hi-fi-transport-buttons">
+
+                        <span></span>
+                        <span></span>
+                        <span></span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="hi-fi-bottom-strip">
+
+                <span>
+                    SOURCE · SPOTIFY
+                </span>
+
+                <span
+                    id="hi-fi-status"
+                    class="hi-fi-status">
+                    SIGNAL LOCK
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div
+        id="record-shelf"
+        class="record-shelf layout-inactive">
+
+        <div class="record-shelf-stage">
+
+            <div class="record-shelf-deck">
+
+                <div class="record-shelf-platter">
+
+                    <div class="record-shelf-platter-rim">
+                    </div>
+
+                    <div
+                        id="record-shelf-record"
+                        class="record-shelf-record"
+                        aria-hidden="true">
+
+                        <i></i>
+
+                        <div
+                            id="record-shelf-current-sleeve"
+                            class="record-shelf-current-sleeve">
+
+                            <img
+                                id="record-shelf-album-image"
+                                class="record-shelf-album-image"
+                                alt="">
+
+                            <div
+                                id="record-shelf-artwork-fallback"
+                                class="record-shelf-artwork-fallback"
+                                aria-hidden="true">
+                                ♪
+                            </div>
+
+                            <div
+                                class="record-shelf-sleeve-gloss"
+                                aria-hidden="true">
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div
+                        class="record-shelf-spindle"
+                        aria-hidden="true">
+                    </div>
+
+                </div>
+
+                <div
+                    class="record-shelf-tonearm-base"
+                    aria-hidden="true">
+                </div>
+
+                <div
+                    class="record-shelf-tonearm"
+                    aria-hidden="true">
+
+                    <span class="record-shelf-tonearm-head">
+                    </span>
+
+                </div>
+
+                <div
+                    class="record-shelf-pitch"
+                    aria-hidden="true">
+
+                    <span class="record-shelf-pitch-label">
+                        PITCH
+                    </span>
+
+                    <div class="record-shelf-pitch-track">
+
+                        <div class="record-shelf-pitch-thumb">
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div
+                    class="record-shelf-controls"
+                    aria-hidden="true">
+
+                    <span class="record-shelf-button">
+                        33
+                    </span>
+
+                    <span class="record-shelf-button">
+                        45
+                    </span>
+
+                    <span class="record-shelf-start-stop">
+                        START / STOP
+                    </span>
+
+                </div>
+
+                <div
+                    id="record-shelf-info"
+                    class="record-shelf-info">
+
+                    <div class="record-shelf-kicker">
+                        NOW SPINNING
+                    </div>
+
+                    <div
+                        id="record-shelf-track-name"
+                        class="record-shelf-track-name">
+                        Track
+                    </div>
+
+                    <div
+                        id="record-shelf-artist-name"
+                        class="record-shelf-artist-name">
+                        Artist
+                    </div>
+
+                    <div
+                        id="record-shelf-album-name"
+                        class="record-shelf-album-name">
+                        Album
+                    </div>
+
+                    <div class="record-shelf-info-footer">
+
+                        <span class="record-shelf-side">
+                            SIDE A
+                        </span>
+
+                        <span
+                            id="record-shelf-time-remaining"
+                            class="record-shelf-time-remaining">
+                            -0:00
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <div class="record-shelf-rail">
+
+                    <div
+                        id="record-shelf-progress-played"
+                        class="record-shelf-progress-played">
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div id="omsc-audio-visualiser"
+         class="omsc-audio-visualiser layout-inactive"
+         aria-label="Now playing visualiser">
+
+        <div class="omsc-visualiser-art">
+            <img id="omsc-visualiser-artwork" alt="">
+            <span id="omsc-visualiser-art-fallback">♫</span>
+        </div>
+
+        <div class="omsc-visualiser-details">
+
+            <span class="omsc-visualiser-kicker">
+                NOW PLAYING
+            </span>
+
+            <div id="omsc-visualiser-track"
+                 class="omsc-visualiser-track"></div>
+
+            <div id="omsc-visualiser-artist"
+                 class="omsc-visualiser-artist"></div>
+
+            <div id="omsc-visualiser-bars"
+                 class="omsc-visualiser-bars"></div>
+
+            <div class="omsc-visualiser-progress">
+                <div id="omsc-visualiser-progress-fill"></div>
+            </div>
+
+        </div>
+    </div>
+    <script src="/progress-paths.js"></script>
+    <script src="./audio-visualiser-engine.js"></script>
+    <script src="./audio-visualiser-layouts.js"></script>
+    <!-- OMSC_STAGE8B_MARKER -->
+    <div id="omsc-split-panel-duo" class="spd-root">
+        <div class="spd-art-card">
+            <div class="spd-art-frame">
+                <div class="spd-art-default"></div>
+                <img id="spd-cover-image" class="spd-art-image" alt="Spotify album artwork">
+            </div>
+        </div>
+        <div class="spd-detail-card">
+            <div class="spd-label">
+                <span class="spd-equaliser" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+                NOW PLAYING
+            </div>
+            <div id="spd-title" class="spd-title">Midnight Run</div>
+            <div id="spd-artist" class="spd-artist">The Old FARKs</div>
+            <div id="spd-album" class="spd-album">Night Shift Sessions</div>
+            <div class="spd-bottom">
+                <div class="spd-progress-wrap">
+                    <div class="spd-progress-rail">
+                        <div id="spd-progress-fill" class="spd-progress-fill"></div>
+                    </div>
+                    <div class="spd-status">
+                        <span class="spd-status-dot"></span>
+                        <span id="spd-status">PLAYING</span>
+                    </div>
+                </div>
+                <div class="spd-remaining">
+                    <span id="spd-remaining">-3:40</span>
+                    <span class="spd-remaining-caption">REMAINING</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- OMSC_STAGE7C_MARKER -->
+    <div id="omsc-spectrum-ring" class="sr-root">
+        <div class="sr-orbit">
+            <svg class="sr-orbit-svg" viewBox="0 0 160 160"
+                 role="img" aria-label="Circular track progress">
+                <defs>
+                    <linearGradient id="sr-ring-gradient" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stop-color="var(--sr-primary)"></stop>
+                        <stop offset="100%" stop-color="var(--sr-secondary)"></stop>
+                    </linearGradient>
+                </defs>
+                <g id="sr-spectrum-ticks"></g>
+                <circle class="sr-ring-track" cx="80" cy="80" r="68"></circle>
+                <circle id="sr-progress" class="sr-ring-progress"
+                        cx="80" cy="80" r="68"></circle>
+                <circle class="sr-ring-inner" cx="80" cy="80" r="61"></circle>
+            </svg>
+            <div class="sr-album-wrap">
+                <div class="sr-album-default"></div>
+                <img id="sr-cover-image" alt="Spotify album artwork">
+            </div>
+        </div>
+        <div class="sr-detail">
+            <div class="sr-topline">
+                <span class="sr-mini-eq" aria-hidden="true">
+                    <i></i><i></i><i></i><i></i>
+                </span>
+                NOW PLAYING
+            </div>
+            <div id="sr-track" class="sr-track">Midnight Run</div>
+            <div id="sr-artist" class="sr-artist">The Old FARKs</div>
+            <div id="sr-album" class="sr-album">Night Shift Sessions</div>
+            <div class="sr-detail-bottom">
+                <span class="sr-status"><i></i><span id="sr-status">PLAYING</span></span>
+                <div>
+                    <div id="sr-remaining" class="sr-counter">-3:40</div>
+                    <div class="sr-counter-caption">REMAINING</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- OMSC_STAGE6B_MARKER -->
+    <div id="omsc-turntable-minimal" class="ttm-root">
+        <div class="ttm-info">
+            <div class="ttm-eyebrow">NOW PLAYING</div>
+            <div id="ttm-title" class="ttm-title">Track</div>
+            <div id="ttm-artist" class="ttm-artist">Artist</div>
+
+            <div class="ttm-progress">
+                <div id="ttm-progress-fill"
+                     class="ttm-progress-fill"></div>
+            </div>
+
+            <div class="ttm-footer">
+                <span class="ttm-status">
+                    <span class="ttm-dot"></span>
+                    <span id="ttm-state">PLAYING</span>
+                </span>
+                <span id="ttm-remaining">-0:00</span>
+            </div>
+        </div>
+
+        <div class="ttm-deck">
+            <div class="ttm-platter"></div>
+
+            <div id="ttm-vinyl" class="ttm-vinyl">
+                <div class="ttm-label">
+                    <img id="ttm-artwork" alt="">
+                    <span id="ttm-artwork-fallback">OMSC</span>
+                </div>
+            </div>
+
+            <div class="ttm-arm">
+                <div class="ttm-pivot"></div>
+                <div id="ttm-shaft" class="ttm-shaft">
+                    <div class="ttm-cartridge"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./split-panel-duo.js"></script>
+    <script src="./spectrum-ring.js"></script>
+    <script src="./turntable-minimal.js"></script>
+    <script src="./widget.js"></script>
+
+</body>
+</html>

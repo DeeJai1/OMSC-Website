@@ -1,0 +1,6 @@
+/* OMSC website demo ONLY. Pure black stage for sound/video Alerts preview.
+   Original OMSC Alerts renderer CSS and JavaScript are kept unchanged. */
+html, body, #alerts-stage {
+    background: #000000 !important;
+    background-image: none !important;
+}

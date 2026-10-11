@@ -1,0 +1,1549 @@
+html,
+body {
+    width: 100%;
+    height: 100%;
+
+    margin: 0;
+
+    overflow: hidden;
+
+    background: transparent;
+}
+
+body {
+    font-family:
+        Inter,
+        "Segoe UI",
+        Arial,
+        sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.credits-widget {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    background: transparent;
+}
+
+.credits-canvas {
+    position: relative;
+
+    flex: 0 0 auto;
+
+    width: 1920px;
+    height: 1080px;
+
+    overflow: hidden;
+
+    background: transparent;
+
+    transform-origin: center center;
+
+    will-change: transform;
+}
+
+.credits-scale-shell {
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    width: 100%;
+    height: 100%;
+
+    transform:
+        translate(
+            -50%,
+            -50%);
+
+    transform-origin:
+        center center;
+
+    will-change:
+        transform;
+}
+
+.credits-content {
+    width: 100%;
+
+    padding: 28px 36px;
+
+    text-align: center;
+
+    will-change: transform;
+}
+
+.credits-logo {
+    display: flex;
+    justify-content: center;
+
+    margin-bottom: 42px;
+}
+
+.credits-logo-image {
+    display: block;
+
+    width: auto;
+    height: auto;
+
+    max-width: 80%;
+    max-height: 260px;
+
+    object-fit: contain;
+}
+
+.credits-section {
+    margin-bottom: 34px;
+}
+
+.credits-section:last-child {
+    margin-bottom: 0;
+}
+
+.credits-heading {
+    margin-bottom: 14px;
+
+    font-size: 30px;
+    font-weight: 800;
+
+    line-height: 1.15;
+
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+
+    text-shadow:
+        0 2px 6px
+        rgba(0, 0, 0, 0.55);
+}
+
+.credits-entry-list {
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            var(--credits-column-count, 2),
+            minmax(0, 1fr));
+
+    gap: 10px 12px;
+
+    width: min(94%, 760px);
+
+    margin: 0 auto;
+}
+@media (min-width: 561px) {
+    .credits-entry-list-two-column
+    > .credits-entry-card:last-child:nth-child(odd) {
+        grid-column:
+            1 / -1;
+
+        width:
+            calc((100% - 12px) / 2);
+
+        justify-self:
+            center;
+    }
+
+    .credits-entry-list-compact.credits-entry-list-two-column
+    > .credits-entry-card:last-child:nth-child(odd) {
+        width:
+            calc((100% - 10px) / 2);
+    }
+}
+
+
+.credits-entry-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    width: 100%;
+    min-height: 58px;
+
+    padding: 11px 16px;
+
+    background:
+        rgba(8, 7, 13, 0.72);
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.18);
+
+    border-left-width: 3px;
+    border-radius: 12px;
+
+    text-align: left;
+
+    box-shadow:
+        0 5px 18px
+        rgba(0, 0, 0, 0.30);
+
+    backdrop-filter:
+        blur(4px);
+}
+
+.credits-entry-card-with-avatar {
+    min-height: 72px;
+}
+
+.credits-entry-list-compact {
+    grid-template-columns:
+        repeat(
+            var(--credits-column-count, 2),
+            minmax(0, 1fr));
+
+    gap: 8px 10px;
+
+    width: min(94%, 620px);
+}
+
+.credits-entry-card-compact {
+    min-height: 40px;
+
+    padding: 7px 12px;
+
+    justify-content: center;
+
+    text-align: center;
+
+    border-left-width: 2px;
+
+    border-radius: 9px;
+}
+
+.credits-entry-card-compact
+.credits-entry-body {
+    align-items: center;
+}
+
+.credits-entry-card-compact
+.credits-entry-name {
+    width: 100%;
+
+    font-size: 18px;
+    font-weight: 650;
+
+    text-align: center;
+}
+
+.credits-entry-avatar {
+    position: relative;
+
+    flex:
+        0 0
+        52px;
+
+    width: 52px;
+    height: 52px;
+
+    overflow: hidden;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background:
+        rgba(255, 255, 255, 0.08);
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.22);
+
+    border-radius: 50%;
+}
+
+.credits-entry-avatar-fallback {
+    color:
+        rgba(255, 255, 255, 0.78);
+
+    font-size: 15px;
+    font-weight: 800;
+
+    letter-spacing: 0.04em;
+}
+
+.credits-entry-avatar-image {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    border-radius: 50%;
+}
+
+.credits-entry-avatar.has-image
+.credits-entry-avatar-fallback {
+    visibility: hidden;
+}
+
+.credits-entry-body {
+    min-width: 0;
+
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.credits-entry-name {
+    overflow: hidden;
+
+    font-size: 23px;
+    font-weight: 700;
+
+    line-height: 1.2;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    text-shadow:
+        0 2px 5px
+        rgba(0, 0, 0, 0.55);
+}
+
+.credits-entry-detail {
+    color:
+        rgba(255, 255, 255, 0.66);
+
+    font-size: 14px;
+    font-weight: 600;
+
+    line-height: 1.25;
+}
+
+.credits-power-up-list {
+    display: flex;
+    flex-direction: column;
+
+    gap: 2px;
+
+    margin-top: 2px;
+}
+
+.credits-power-up-item {
+    color:
+        rgba(255, 255, 255, 0.58);
+
+    font-size: 12px;
+    font-weight: 600;
+
+    line-height: 1.25;
+
+    white-space: normal;
+    overflow-wrap: anywhere;
+}
+
+@media (max-width: 560px) {
+    .credits-entry-list,
+    .credits-entry-list-compact {
+        grid-template-columns:
+            minmax(0, 1fr);
+    }
+
+    .credits-entry-list {
+        width: min(94%, 520px);
+    }
+}
+
+
+/* =========================================================
+   Stream Credits - Layout Framework
+   ========================================================= */
+
+.credits-canvas {
+    --credits-transition-ms: 700ms;
+}
+
+
+/* Perspective Crawl */
+
+.credits-canvas.layout-perspective-crawl
+.credits-content {
+    transform-style: preserve-3d;
+}
+
+.credits-canvas.layout-perspective-crawl
+.credits-section,
+.credits-canvas.layout-perspective-crawl
+.credits-logo {
+    will-change:
+        transform,
+        opacity;
+}
+
+.credits-canvas.layout-perspective-crawl
+.credits-heading {
+    font-size: 36px;
+    letter-spacing: 2px;
+}
+
+
+/* Shared section-by-section layouts */
+
+.credits-canvas.layout-flying-credits
+.credits-content,
+.credits-canvas.layout-credit-cards
+.credits-content,
+.credits-canvas.layout-spotlight
+.credits-content,
+.credits-canvas.layout-retro-arcade
+.credits-content {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+
+    padding: 5% 7%;
+
+    transform: none !important;
+}
+
+.credits-canvas.layout-flying-credits
+.credits-content
+> .credits-section,
+.credits-canvas.layout-flying-credits
+.credits-content
+> .credits-logo,
+.credits-canvas.layout-credit-cards
+.credits-content
+> .credits-section,
+.credits-canvas.layout-credit-cards
+.credits-content
+> .credits-logo,
+.credits-canvas.layout-spotlight
+.credits-content
+> .credits-section,
+.credits-canvas.layout-spotlight
+.credits-content
+> .credits-logo,
+.credits-canvas.layout-retro-arcade
+.credits-content
+> .credits-section,
+.credits-canvas.layout-retro-arcade
+.credits-content
+> .credits-logo {
+    position: absolute;
+
+    inset:
+        6%
+        8%;
+
+    width: auto;
+    height: auto;
+
+    margin: 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    visibility: hidden;
+    opacity: 0;
+
+    pointer-events: none;
+}
+
+.credits-canvas.layout-flying-credits
+.credits-content
+> .credits-sequence-active,
+.credits-canvas.layout-credit-cards
+.credits-content
+> .credits-sequence-active,
+.credits-canvas.layout-spotlight
+.credits-content
+> .credits-sequence-active,
+.credits-canvas.layout-retro-arcade
+.credits-content
+> .credits-sequence-active {
+    visibility: visible;
+    opacity: 1;
+
+    animation:
+        credits-section-enter
+        var(--credits-transition-ms)
+        cubic-bezier(
+            0.22,
+            1,
+            0.36,
+            1)
+        both;
+}
+
+.credits-canvas.layout-flying-credits
+.credits-content
+> .credits-sequence-exit,
+.credits-canvas.layout-credit-cards
+.credits-content
+> .credits-sequence-exit,
+.credits-canvas.layout-spotlight
+.credits-content
+> .credits-sequence-exit,
+.credits-canvas.layout-retro-arcade
+.credits-content
+> .credits-sequence-exit {
+    visibility: visible;
+    opacity: 1;
+
+    animation:
+        credits-section-exit
+        var(--credits-transition-ms)
+        ease-in
+        both;
+}
+
+@keyframes credits-section-enter {
+
+    from {
+        opacity: 0;
+        transform:
+            translateY(26px)
+            scale(0.965);
+        filter: blur(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            translateY(0)
+            scale(1);
+        filter: blur(0);
+    }
+}
+
+@keyframes credits-section-exit {
+
+    from {
+        opacity: 1;
+        transform:
+            translateY(0)
+            scale(1);
+        filter: blur(0);
+    }
+
+    to {
+        opacity: 0;
+        transform:
+            translateY(-22px)
+            scale(0.98);
+        filter: blur(6px);
+    }
+}
+
+
+/* OMSC v0.4.33: Flying Credits compositing polish.
+   Other credits layouts retain their original effects. */
+.credits-canvas.layout-flying-credits .credits-content > .credits-sequence-active {
+    animation-name: credits-flying-section-enter;
+    will-change: transform, opacity;
+}
+.credits-canvas.layout-flying-credits .credits-content > .credits-sequence-exit {
+    animation-name: credits-flying-section-exit;
+    will-change: transform, opacity;
+}
+.credits-canvas.layout-flying-credits .credits-sequence-active .credits-entry-card {
+    will-change: transform, opacity;
+}
+.credits-canvas.layout-flying-credits .credits-entry-card {
+    /* Backdrop sampling on every moving card forced avoidable GPU work in OBS. */
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+@keyframes credits-flying-section-enter {
+    from { opacity: 0; transform: translate3d(0, 26px, 0) scale(0.965); }
+    to { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+}
+@keyframes credits-flying-section-exit {
+    from { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+    to { opacity: 0; transform: translate3d(0, -22px, 0) scale(0.98); }
+}
+
+/* Flying Credits */
+
+.credits-canvas.layout-flying-credits
+.credits-heading {
+    margin-bottom: 34px;
+
+    font-size: 48px;
+    letter-spacing: 2.2px;
+}
+
+.credits-canvas.layout-flying-credits
+.credits-entry-list {
+    width:
+        min(
+            90%,
+            1080px);
+
+    gap:
+        18px
+        24px;
+}
+
+.credits-canvas.layout-flying-credits
+.credits-entry-card {
+    min-height: 62px;
+
+    justify-content: center;
+
+    background:
+        rgba(
+            8,
+            7,
+            13,
+            0.48);
+
+    border-color:
+        rgba(
+            255,
+            255,
+            255,
+            0.12);
+
+    box-shadow:
+        0
+        8px
+        30px
+        rgba(
+            0,
+            0,
+            0,
+            0.22);
+}
+
+.credits-canvas.layout-flying-credits
+.credits-entry-name {
+    font-size: 25px;
+}
+
+.credits-canvas.layout-flying-credits
+.credits-sequence-active
+.credits-entry-card {
+    animation-duration:
+        calc(
+            var(--credits-transition-ms)
+            + 260ms);
+
+    animation-timing-function:
+        cubic-bezier(
+            0.16,
+            1,
+            0.30,
+            1);
+
+    animation-fill-mode:
+        both;
+
+    animation-delay:
+        var(
+            --credits-entry-delay,
+            0ms);
+}
+
+.credits-motion-slide-left {
+    animation-name:
+        credits-fly-slide-left;
+}
+
+.credits-motion-slide-right {
+    animation-name:
+        credits-fly-slide-right;
+}
+
+.credits-motion-drop {
+    animation-name:
+        credits-fly-drop;
+}
+
+.credits-motion-rise {
+    animation-name:
+        credits-fly-rise;
+}
+
+.credits-motion-swing {
+    animation-name:
+        credits-fly-swing;
+}
+
+.credits-motion-pop {
+    animation-name:
+        credits-fly-pop;
+}
+
+/* OMSC_V0433_STAGE14_FLYING_SMOOTH_LANDING: one-way, ease-out landings.
+   No reverse/overshoot frames at the end of a Flying Credits entry. */
+@keyframes credits-fly-slide-left {
+    from {
+        opacity: 0;
+        transform: translate3d(-130%, 0, 0) rotate(-7deg);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) rotate(0deg);
+    }
+}
+
+@keyframes credits-fly-slide-right {
+    from {
+        opacity: 0;
+        transform: translate3d(130%, 0, 0) rotate(7deg);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) rotate(0deg);
+    }
+}
+
+@keyframes credits-fly-drop {
+    from {
+        opacity: 0;
+        transform: translate3d(0, -170px, 0) rotate(-5deg);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) rotate(0deg);
+    }
+}
+
+@keyframes credits-fly-rise {
+    from {
+        opacity: 0;
+        transform: translate3d(0, 170px, 0) rotate(5deg);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) rotate(0deg);
+    }
+}
+
+@keyframes credits-fly-swing {
+    from {
+        opacity: 0;
+        transform: translate3d(-90px, 0, 0) rotate(-24deg) scale(0.82);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+    }
+}
+
+@keyframes credits-fly-pop {
+    from {
+        opacity: 0;
+        transform: translate3d(0, 0, 0) scale(0.40) rotate(-8deg);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+    }
+}
+
+/* Credit Cards */
+
+.credits-canvas.layout-credit-cards
+.credits-content
+> .credits-section {
+    inset:
+        10%
+        13%;
+
+    padding:
+        46px
+        54px;
+
+    background:
+        rgba(
+            8,
+            7,
+            13,
+            0.84);
+
+    border:
+        2px solid
+        rgba(
+            255,
+            255,
+            255,
+            0.16);
+
+    border-radius: 28px;
+
+    box-shadow:
+        0
+        28px
+        80px
+        rgba(
+            0,
+            0,
+            0,
+            0.48);
+
+    backdrop-filter:
+        blur(7px);
+}
+
+.credits-canvas.layout-credit-cards
+.credits-heading {
+    margin-bottom: 28px;
+
+    font-size: 46px;
+    letter-spacing: 2px;
+}
+
+.credits-canvas.layout-credit-cards
+.credits-entry-list {
+    width:
+        min(
+            96%,
+            1050px);
+}
+
+
+/* Spotlight */
+
+.credits-canvas.layout-spotlight
+.credits-content
+> .credits-section {
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(
+                255,
+                255,
+                255,
+                0.075),
+            transparent 65%);
+}
+
+.credits-canvas.layout-spotlight
+.credits-heading {
+    margin-bottom: 38px;
+
+    font-size: 54px;
+    letter-spacing: 2.4px;
+}
+
+.credits-canvas.layout-spotlight
+.credits-entry-list {
+    width:
+        min(
+            90%,
+            1000px);
+
+    gap:
+        14px
+        20px;
+}
+
+.credits-canvas.layout-spotlight
+.credits-entry-card {
+    justify-content: center;
+
+    background: transparent;
+
+    border-color: transparent;
+
+    box-shadow: none;
+
+    backdrop-filter: none;
+}
+
+.credits-canvas.layout-spotlight
+.credits-entry-name {
+    font-size: 27px;
+}
+
+.credits-canvas.layout-spotlight
+.credits-sequence-active
+.credits-entry-card {
+    animation:
+        credits-spotlight-name
+        650ms
+        ease-out
+        both;
+
+    animation-delay:
+        var(
+            --credits-entry-delay,
+            0ms);
+}
+
+@keyframes credits-spotlight-name {
+
+    from {
+        opacity: 0;
+        transform:
+            translateY(18px)
+            scale(0.94);
+        filter: blur(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            translateY(0)
+            scale(1);
+        filter: blur(0);
+    }
+}
+
+
+/* Retro Arcade */
+
+.credits-canvas.layout-retro-arcade {
+    font-family:
+        Consolas,
+        "Courier New",
+        monospace;
+
+    --retro-panel-background:
+        rgba(
+            22,
+            8,
+            46,
+            0.72);
+
+    --retro-card-background:
+        rgba(
+            13,
+            4,
+            31,
+            0.84);
+
+    --retro-border-colour:
+        #00D9FF;
+
+    --retro-card-border-colour:
+        rgba(
+            0,
+            217,
+            255,
+            0.52);
+
+    --retro-scanline-colour:
+        rgba(
+            0,
+            217,
+            255,
+            0.11);
+
+    --retro-shadow-colour:
+        rgba(
+            255,
+            59,
+            203,
+            0.46);
+
+    --retro-glow-colour:
+        rgba(
+            0,
+            217,
+            255,
+            0.34);
+}
+
+
+.credits-canvas.layout-retro-arcade::after {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    z-index: 20;
+
+    pointer-events: none;
+
+    opacity: 0.36;
+
+    background:
+        repeating-linear-gradient(
+            to bottom,
+            var(
+                --retro-scanline-colour)
+                0,
+            var(
+                --retro-scanline-colour)
+                1px,
+            transparent
+                1px,
+            transparent
+                4px);
+}
+
+
+.credits-canvas.layout-retro-arcade
+.credits-content
+> .credits-section {
+    inset:
+        9%
+        12%;
+
+    padding:
+        34px;
+
+    background:
+        var(
+            --retro-panel-background);
+
+    border:
+        4px solid
+        var(
+            --retro-border-colour);
+
+    border-radius: 0;
+
+    box-shadow:
+        10px
+        10px
+        0
+        var(
+            --retro-shadow-colour),
+
+        0
+        0
+        38px
+        var(
+            --retro-glow-colour);
+}
+
+
+.credits-canvas.layout-retro-arcade
+.credits-heading {
+    margin-bottom: 32px;
+
+    font-size: 44px;
+    font-weight: 900;
+
+    letter-spacing: 4px;
+}
+
+
+.credits-canvas.layout-retro-arcade
+.credits-entry-list {
+    width:
+        min(
+            92%,
+            1040px);
+
+    gap:
+        12px;
+}
+
+
+.credits-canvas.layout-retro-arcade
+.credits-entry-card {
+    min-height: 52px;
+
+    background:
+        var(
+            --retro-card-background);
+
+    border:
+        2px solid
+        var(
+            --retro-card-border-colour);
+
+    border-left-color:
+        var(
+            --retro-border-colour)
+        !important;
+
+    border-radius: 0;
+
+    box-shadow:
+        5px
+        5px
+        0
+        var(
+            --retro-shadow-colour),
+
+        0
+        0
+        15px
+        var(
+            --retro-glow-colour);
+
+    backdrop-filter: none;
+}
+
+
+.credits-canvas.layout-retro-arcade
+.credits-entry-name {
+    font-family:
+        Consolas,
+        "Courier New",
+        monospace;
+
+    font-size: 22px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1.2px;
+}
+
+
+.credits-canvas.layout-retro-arcade
+.credits-entry-detail {
+    font-family:
+        Consolas,
+        "Courier New",
+        monospace;
+
+    letter-spacing: 0.6px;
+}
+
+
+.credits-canvas.layout-retro-arcade
+.credits-entry-avatar {
+    border-radius: 4px;
+
+    border-color:
+        var(
+            --retro-border-colour);
+
+    box-shadow:
+        0
+        0
+        12px
+        var(
+            --retro-glow-colour);
+}
+
+
+.credits-canvas.layout-retro-arcade
+.credits-entry-avatar-image {
+    border-radius: 3px;
+}
+
+
+.credits-canvas.layout-retro-arcade
+.credits-sequence-active
+.credits-entry-card {
+    animation:
+        credits-retro-pop
+        480ms
+        steps(
+            4,
+            end)
+        both;
+
+    animation-delay:
+        var(
+            --credits-entry-delay,
+            0ms);
+}
+
+
+@keyframes credits-retro-pop {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(28px)
+            scale(0.86);
+    }
+
+    50% {
+        opacity: 1;
+
+        transform:
+            translateY(8px)
+            scale(1.03);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+
+
+/* =========================================================
+   Stream Credits - Terminal
+   ========================================================= */
+
+.credits-canvas.layout-terminal {
+    --terminal-background:
+        rgba(
+            1,
+            19,
+            7,
+            0.92);
+
+    --terminal-panel:
+        rgba(
+            0,
+            11,
+            4,
+            0.95);
+
+    --terminal-text:
+        #72FF91;
+
+    --terminal-prompt:
+        #B5FFC3;
+
+    --terminal-heading:
+        #39FF68;
+
+    --terminal-muted:
+        #4DBB65;
+
+    --terminal-border:
+        rgba(
+            73,
+            255,
+            111,
+            0.58);
+
+    --terminal-glow:
+        rgba(
+            57,
+            255,
+            104,
+            0.24);
+
+    --terminal-scanline:
+        rgba(
+            93,
+            255,
+            126,
+            0.055);
+
+    background:
+        transparent;
+
+    font-family:
+        Consolas,
+        "Courier New",
+        monospace;
+}
+
+
+.credits-canvas.layout-terminal
+.credits-content {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+
+    padding: 0;
+
+    transform:
+        none !important;
+}
+
+
+.credits-canvas.layout-terminal
+.credits-content
+> .credits-section,
+.credits-canvas.layout-terminal
+.credits-content
+> .credits-logo {
+    display: none;
+}
+
+
+.credits-terminal-shell {
+    position: absolute;
+
+    inset:
+        6%
+        7%;
+
+    display: flex;
+    flex-direction: column;
+
+    overflow: hidden;
+
+    background:
+        var(
+            --terminal-background);
+
+    border:
+        2px solid
+        var(
+            --terminal-border);
+
+    border-radius: 8px;
+
+    box-shadow:
+        0
+        0
+        42px
+        var(
+            --terminal-glow),
+
+        inset
+        0
+        0
+        55px
+        rgba(
+            0,
+            0,
+            0,
+            0.42);
+}
+
+
+.credits-terminal-shell::after {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    z-index: 6;
+
+    pointer-events: none;
+
+    background:
+        repeating-linear-gradient(
+            to bottom,
+            var(
+                --terminal-scanline)
+                0,
+            var(
+                --terminal-scanline)
+                1px,
+            transparent
+                1px,
+            transparent
+                4px);
+
+    opacity: 0.72;
+}
+
+
+.credits-terminal-titlebar {
+    position: relative;
+
+    z-index: 4;
+
+    display: flex;
+    align-items: center;
+
+    min-height: 48px;
+
+    padding:
+        0
+        18px;
+
+    background:
+        var(
+            --terminal-panel);
+
+    border-bottom:
+        1px solid
+        var(
+            --terminal-border);
+}
+
+
+.credits-terminal-lights {
+    display: flex;
+
+    gap: 8px;
+
+    margin-right: 18px;
+}
+
+
+.credits-terminal-lights span {
+    width: 10px;
+    height: 10px;
+
+    border:
+        1px solid
+        var(
+            --terminal-border);
+
+    border-radius: 50%;
+
+    background:
+        var(
+            --terminal-muted);
+
+    opacity: 0.72;
+
+    box-shadow:
+        0
+        0
+        8px
+        var(
+            --terminal-glow);
+}
+
+
+.credits-terminal-title {
+    color:
+        var(
+            --terminal-muted);
+
+    font-size: 15px;
+    font-weight: 700;
+
+    letter-spacing: 1.2px;
+}
+
+
+.credits-terminal-output {
+    position: relative;
+
+    z-index: 4;
+
+    flex: 1;
+
+    overflow: hidden;
+
+    padding:
+        34px
+        42px;
+
+    background:
+        var(
+            --terminal-panel);
+
+    color:
+        var(
+            --terminal-text);
+
+    font-family:
+        Consolas,
+        "Courier New",
+        monospace;
+
+    font-size: 25px;
+
+    line-height: 1.55;
+
+    text-shadow:
+        0
+        0
+        9px
+        var(
+            --terminal-glow);
+}
+
+
+.credits-terminal-line {
+    min-height: 1.55em;
+
+    white-space: pre-wrap;
+
+    word-break: break-word;
+}
+
+
+.credits-terminal-prefix {
+    color:
+        var(
+            --terminal-prompt);
+
+    font-weight: 700;
+}
+
+
+.credits-terminal-command {
+    color:
+        var(
+            --terminal-text);
+
+    margin-bottom: 10px;
+}
+
+
+.credits-terminal-heading {
+    margin:
+        6px
+        0
+        18px;
+
+    color:
+        var(
+            --terminal-heading);
+
+    font-size: 30px;
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+}
+
+
+.credits-terminal-name {
+    padding-left: 24px;
+
+    color:
+        var(
+            --terminal-text);
+}
+
+
+.credits-terminal-name::before {
+    content: "> ";
+
+    color:
+        var(
+            --terminal-muted);
+}
+
+
+.credits-terminal-clear {
+    margin-top: 24px;
+}
+
+
+.credits-terminal-cursor {
+    display: inline-block;
+
+    margin-left: 2px;
+
+    color:
+        var(
+            --terminal-prompt);
+
+    animation:
+        credits-terminal-cursor-blink
+        760ms
+        steps(
+            1,
+            end)
+        infinite;
+}
+
+
+@keyframes credits-terminal-cursor-blink {
+
+    0%,
+    48% {
+        opacity: 1;
+    }
+
+    49%,
+    100% {
+        opacity: 0;
+    }
+}
+
+
+.credits-empty {
+    display: none;
+}

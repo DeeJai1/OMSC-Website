@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1">
+
+    <title>OMSC Stream Credits</title>
+
+    <link
+        rel="stylesheet"
+        href="./widget.css">
+    <!-- Website-only: the OMSC widget normally uses transparent OBS output.
+         A public demonstration needs a black canvas instead of browser white.
+         Original OMSC widget.js and widget.css stay unchanged. -->
+    <style id="omsc-website-credits-black-canvas">
+      html, body, #credits-widget { background: #000000 !important; }
+    </style>
+</head>
+
+<body>
+    <script src="/widget-site/demo-data.js"></script>
+
+    <main
+        id="credits-widget"
+        class="credits-widget">
+
+        <div
+            id="credits-canvas"
+            class="credits-canvas">
+
+            <div
+                id="credits-scale-shell"
+                class="credits-scale-shell">
+
+                <div
+                    id="credits-content"
+                    class="credits-content">
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <script src="./widget.js"></script>
+
+</body>
+</html>
