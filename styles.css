@@ -136,7 +136,7 @@
   background-image: none !important;
 }
 
-/* OMSC v3.6 — Streamer.bot integration and locally persisted stream records */
+/* Native Twitch chat, commands and locally persisted stream records */
 .omsc-capability-highlights {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -164,7 +164,7 @@
   line-height: 1;
   font-weight: 800;
 }
-.omsc-capability-symbol.bot-symbol {
+.omsc-capability-symbol.twitch-symbol {
   color: #8de5ff;
   background: rgba(0, 167, 219, .12);
 }
@@ -250,7 +250,7 @@
   flex: none;
 }
 .benefit-icon.spotify-green .omsc-brand-icon { width: 21px; height: 21px; }
-.omsc-capability-symbol.bot-symbol .omsc-brand-icon { width: 39px; height: 39px; }
+.omsc-capability-symbol.twitch-symbol .omsc-brand-icon { width: 39px; height: 39px; }
 @media (max-width: 520px) {
-  .omsc-capability-symbol.bot-symbol .omsc-brand-icon { width: 35px; height: 35px; }
+  .omsc-capability-symbol.twitch-symbol .omsc-brand-icon { width: 35px; height: 35px; }
 }
