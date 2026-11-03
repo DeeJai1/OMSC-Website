@@ -254,3 +254,11 @@
 @media (max-width: 520px) {
   .omsc-capability-symbol.twitch-symbol .omsc-brand-icon { width: 35px; height: 35px; }
 }
+
+/* FAQ guidance groups: clearly separate topics without turning the FAQ into visual cards. */
+.faq-category{margin:31px 0 2px;padding:0 0 10px;color:#b5a2ff;font-size:.76rem;letter-spacing:.11em;text-transform:uppercase;font-weight:780;border-bottom:1px solid rgba(164,188,236,.14)}
+.faq-category:first-child{margin-top:0}
+.faq-list details p a{color:#c5b6ff;text-decoration:underline;text-underline-offset:3px}
+.faq-list details p a:hover{color:#fff}
+.faq-list details p strong{color:#e2e8ff}
+@media(max-width:760px){.faq-category{margin-top:25px}.faq-list summary{padding-top:18px;padding-bottom:18px}}
