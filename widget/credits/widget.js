@@ -425,6 +425,14 @@ let sequenceTransitionTimer =
 let sequenceIndex =
     0;
 
+// OMSC_V0435_CREDITS_OBS_VISIBILITY: suspended OBS browser sources must
+// never resume with stale section transitions from a hidden scene.
+let creditsSourceActive =
+    !document.hidden;
+
+let creditsSequenceEpoch =
+    0;
+
 const canvas =
     document.getElementById(
         "credits-canvas");
@@ -2705,6 +2713,8 @@ function applyRetroArcadeTheme()
 
 function stopCreditsSequence()
 {
+    creditsSequenceEpoch++;
+
     if (sequenceTimer !== null)
     {
         clearTimeout(
@@ -2789,6 +2799,13 @@ function restartCreditsRoll()
 
     content.style.transform =
         "";
+
+    if (!creditsSourceActive)
+    {
+        content.style.visibility =
+            "hidden";
+        return;
+    }
 
     if (content.classList.contains(
             "credits-empty") ||
@@ -3067,6 +3084,7 @@ function showCreditsSequenceItem(
     index)
 {
     if (
+        !creditsSourceActive ||
         rollLimitReached ||
         items.length === 0)
     {
@@ -3079,16 +3097,20 @@ function showCreditsSequenceItem(
         index;
 
     const item =
-        items[
-            sequenceIndex
-        ];
+        items[sequenceIndex];
 
-    prepareCreditsSequenceItem(
-        item);
+    const epoch =
+        creditsSequenceEpoch;
+
+    prepareCreditsSequenceItem(item);
 
     requestAnimationFrame(
         () =>
         {
+            if (!creditsSourceActive ||
+                epoch !== creditsSequenceEpoch)
+                return;
+
             item.classList.add(
                 "credits-sequence-active");
         });
@@ -3097,6 +3119,10 @@ function showCreditsSequenceItem(
         setTimeout(
             () =>
             {
+                if (!creditsSourceActive ||
+                    epoch !== creditsSequenceEpoch)
+                    return;
+
                 item.classList.add(
                     "credits-sequence-exit");
 
@@ -3104,6 +3130,10 @@ function showCreditsSequenceItem(
                     setTimeout(
                         () =>
                         {
+                            if (!creditsSourceActive ||
+                                epoch !== creditsSequenceEpoch)
+                                return;
+
                             item.classList.remove(
                                 "credits-sequence-active",
                                 "credits-sequence-exit");
@@ -3146,8 +3176,6 @@ function showCreditsSequenceItem(
             sectionDisplaySeconds *
             1000);
 }
-
-
 function prepareCreditsSequenceItem(
     item)
 {
@@ -4330,6 +4358,53 @@ async function checkCreditsWidgetAssets()
 }
 
 
+function suspendCreditsForInactiveSource()
+{
+    if (!creditsSourceActive)
+        return;
+
+    creditsSourceActive = false;
+    stopCreditsRoll();
+    stopCreditsSequence();
+    stopTerminalPresentation();
+    clearSequencePresentation();
+    clearPerspectivePresentation();
+    content.style.visibility = "hidden";
+}
+
+function resumeCreditsForActiveSource()
+{
+    if (document.hidden || creditsSourceActive)
+        return;
+
+    creditsSourceActive = true;
+    if (!creditsModuleEnabled ||
+        !currentRenderSignature ||
+        currentRenderSignature === "module-disabled" ||
+        content.classList.contains("credits-empty"))
+        return;
+
+    // Each activation starts one clean cycle; keep existing layout timings.
+    completedCycles = 0;
+    rollLimitReached = false;
+    content.style.visibility = "hidden";
+
+    const resumeEpoch = creditsSequenceEpoch;
+    requestAnimationFrame(() =>
+    {
+        if (creditsSourceActive &&
+            resumeEpoch === creditsSequenceEpoch)
+            restartCreditsRoll();
+    });
+}
+
+function handleCreditsDocumentVisibility()
+{
+    if (document.hidden)
+        suspendCreditsForInactiveSource();
+    else
+        resumeCreditsForActiveSource();
+}
 function handleCreditsResize()
 {
     resizeCreditsCanvas();
@@ -4340,6 +4415,13 @@ function handleCreditsResize()
 window.addEventListener(
     "resize",
     handleCreditsResize);
+
+// OBS browser-source visibility and page suspension are separate signals.
+window.addEventListener("obsSourceHidden", suspendCreditsForInactiveSource);
+window.addEventListener("obsSourceInactive", suspendCreditsForInactiveSource);
+window.addEventListener("obsSourceVisible", resumeCreditsForActiveSource);
+window.addEventListener("obsSourceActive", resumeCreditsForActiveSource);
+document.addEventListener("visibilitychange", handleCreditsDocumentVisibility);
 
 loadCredits();
 

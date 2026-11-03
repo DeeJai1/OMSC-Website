@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#090e1b">
-  <meta name="description" content="Browse the 24 built-in OldMan Stream Companion Twitch chat commands, grouped into viewer and moderator commands.">
+  <meta name="description" content="Browse the 27 default OldMan Stream Companion Twitch chat commands, grouped into viewer and moderator commands.">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Chat Commands | OldMan Stream Companion">
   <meta property="og:description" content="A clear reference for OMSC viewer and moderator Twitch chat commands.">
@@ -42,7 +42,7 @@
         <span class="eyebrow">TWITCH CHAT COMMANDS</span>
         <h1>Every command.<br><span class="gradient-text">One place.</span></h1>
         <p class="commands-lede">Explore the built-in OMSC chat commands, based on the command reference in the actual application. Use the search below to find what you need.</p>
-        <div class="commands-statline"><span><strong>24</strong> commands</span><span><strong>16</strong> viewer commands</span><span><strong>8</strong> moderator commands</span></div>
+        <div class="commands-statline"><span><strong>27</strong> commands</span><span><strong>17</strong> viewer commands</span><span><strong>10</strong> moderator commands</span></div>
       </div>
     </section>
     <section class="commands-content" aria-label="OMSC command reference">
@@ -56,10 +56,10 @@
         <div class="commands-toolbar">
           <label for="commands-search">Find a command</label>
           <input id="commands-search" type="search" placeholder="Search commands or descriptions…" autocomplete="off" spellcheck="false">
-          <p id="commands-results" role="status" aria-live="polite">Showing all 24 commands.</p>
+          <p id="commands-results" role="status" aria-live="polite">Showing all 27 commands.</p>
         </div>
         <section class="commands-group" aria-labelledby="commands-everyone">
-          <div class="commands-group-head"><div><span class="eyebrow">EVERYONE</span><h2 id="commands-everyone">Viewer Commands</h2><p>Commands available to viewers by default.</p></div><span class="commands-count">16 commands</span></div>
+          <div class="commands-group-head"><div><span class="eyebrow">EVERYONE</span><h2 id="commands-everyone">Viewer Commands</h2><p>Commands available to viewers by default.</p></div><span class="commands-count">17 commands</span></div>
           <div class="commands-grid">
           <article class="command-card">
             <div class="command-card-heading">
@@ -109,6 +109,13 @@
               <button type="button" class="command-copy" data-copy="!music-playlist" aria-label="Copy !music-playlist">Copy</button>
             </div>
             <p>Show the community playlist link.</p>
+          </article>
+          <article class="command-card">
+            <div class="command-card-heading">
+              <code class="command-trigger">!music-queue</code>
+              <button type="button" class="command-copy" data-copy="!music-queue" aria-label="Copy !music-queue">Copy</button>
+            </div>
+            <p>Show the next tracks in the song-request queue.</p>
           </article>
           <article class="command-card">
             <div class="command-card-heading">
@@ -176,7 +183,7 @@
           </div>
         </section>
         <section class="commands-group" aria-labelledby="commands-mod">
-          <div class="commands-group-head"><div><span class="eyebrow">MODERATOR</span><h2 id="commands-mod">Moderator / Broadcaster Commands</h2><p>Restricted to moderators and broadcasters by default.</p></div><span class="commands-count">8 commands</span></div>
+          <div class="commands-group-head"><div><span class="eyebrow">MODERATOR</span><h2 id="commands-mod">Moderator / Broadcaster Commands</h2><p>Restricted to moderators and broadcasters by default.</p></div><span class="commands-count">10 commands</span></div>
           <div class="commands-grid">
           <article class="command-card">
             <div class="command-card-heading">
@@ -229,6 +236,20 @@
           </article>
           <article class="command-card">
             <div class="command-card-heading">
+              <code class="command-trigger">!music-so</code>
+              <button type="button" class="command-copy" data-copy="!music-so" aria-label="Copy !music-so">Copy</button>
+            </div>
+            <p>Trigger a shoutout for a Twitch channel.</p>
+          </article>
+          <article class="command-card">
+            <div class="command-card-heading">
+              <code class="command-trigger">!music-version</code>
+              <button type="button" class="command-copy" data-copy="!music-version" aria-label="Copy !music-version">Copy</button>
+            </div>
+            <p>Show the running OMSC application version.</p>
+          </article>
+          <article class="command-card">
+            <div class="command-card-heading">
               <code class="command-trigger">!music-unrestrict</code>
               <button type="button" class="command-copy" data-copy="!music-unrestrict" aria-label="Copy !music-unrestrict">Copy</button>
             </div>
@@ -239,7 +260,7 @@
         <p id="commands-empty" class="commands-empty" hidden>No commands match your search. Try another name or description.</p>
         <div class="commands-endnote">
           <h2>Make them your own.</h2>
-          <p>Manage enabled commands, customise their names and set your command prefix inside OMSC. Native chat commands use your saved names, prefixes and permissions directly in OMSC when enabled in Connections. Some event-driven commands still await native migration.</p>
+          <p>Manage enabled commands, customise their names and set your command prefix inside OMSC. Native chat commands use the saved names, prefixes and permissions in supported v0.4.50 development builds. Native migration is still under testing; command availability varies by enabled module and installed version.</p>
           <a class="btn btn-outline" href="/#features">Explore OMSC features <span aria-hidden="true">↗</span></a>
         </div>
       </div>
