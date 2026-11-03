@@ -50,10 +50,10 @@
           <div class="hero-points" aria-label="Key information"><span><span class="point-icon">✓</span> Runs locally</span><span><span class="point-icon">✓</span> No monthly subscription</span><span><span class="point-icon">✓</span> Configurable modules</span></div>
         </div>
         <div class="hero-display">
-          <a class="dashboard-preview-link" href="assets/omsc-dashboard-v050-preview.svg" target="_blank" rel="noopener noreferrer" aria-label="Open a larger OMSC dashboard layout preview">
-            <img class="dashboard-preview-image" src="assets/omsc-dashboard-v050-preview.svg" width="1440" height="900" alt="Illustrative current OMSC dashboard layout with the grouped sidebar, welcome banner, Spotify connected, Community Playlist enabled, application online, an active track and two song requests. Demonstration data, not a live connection." loading="eager" decoding="async">
+          <a class="dashboard-preview-link" href="assets/omsc-dashboard-v050-preview.svg" target="_blank" rel="noopener noreferrer" aria-label="Open an illustrative dashboard layout. This is not a screenshot from a running OMSC build.">
+            <img class="dashboard-preview-image" src="assets/omsc-dashboard-v050-preview.svg" width="1440" height="900" alt="Illustrative OMSC dashboard layout with sample music data; not a screenshot from the running application." loading="eager" decoding="async">
           </a>
-          <p class="window-caption">Dashboard layout based on the OMSC interface · Demonstration values · <a href="assets/omsc-dashboard-v050-preview.svg" target="_blank" rel="noopener noreferrer">View larger</a></p>
+          <p class="window-caption">Illustrative dashboard layout · Not a current application screenshot · <a href="assets/omsc-dashboard-v050-preview.svg" target="_blank" rel="noopener noreferrer">View larger</a></p>
         </div>
       </div>
     </section>
@@ -68,6 +68,10 @@
         <article class="feature-card"><div class="feature-symbol symbol-playlist">☷</div><h3>Community Playlist</h3><p>Let your community contribute music while retaining moderation tools, history and contributor credits.</p></article>
         <article class="feature-card"><div class="feature-symbol symbol-credits">★</div><h3>Stream Credits</h3><p>Recognise the people behind your stream with flexible layouts and animated on-stream credits.</p></article>
         <article class="feature-card"><div class="feature-symbol symbol-directory">◎</div><h3>Streamer Directory</h3><p>Opt in to discover other OMSC streamers and see who's live in the community.</p></article>
+        <article class="feature-card"><div class="feature-symbol symbol-alert">✦</div><h3>Shoutouts &amp; Raid Welcome</h3><p>Personalise banners and media for visiting streamers and incoming raids, with configurable layouts and playback.</p></article>
+        <article class="feature-card"><div class="feature-symbol symbol-chat">◷</div><h3>Timed Messages</h3><p>Schedule chat messages with configurable intervals and activity requirements. The module starts disabled.</p></article>
+        <article class="feature-card"><div class="feature-symbol symbol-credits">▥</div><h3>Stream Analytics</h3><p>Review locally recorded stream sessions and historical activity. Optional Discord sharing is configured separately.</p></article>
+        <article class="feature-card"><div class="feature-symbol symbol-directory">↻</div><h3>Backup &amp; Restore</h3><p>Export supported settings and data, then restore with archive checks and recovery safeguards.</p></article>
       </div>
       <div class="omsc-capability-highlights" aria-label="Native Twitch chat and local stream data">
         <article class="omsc-capability-card">
@@ -75,7 +79,7 @@
           <div class="omsc-capability-copy">
             <span class="omsc-capability-kicker">TWITCH INTEGRATION</span>
             <h3>Native Twitch chat and commands</h3>
-            <p>Connect your Twitch broadcaster directly to OMSC, optionally use a separate Twitch bot, and receive chat in the Desktop Chat Overlay. Native chat commands are available; other event-driven features are still being migrated.</p>
+            <p>Connect your Twitch broadcaster directly to OMSC, optionally use a separate Twitch bot, and receive chat in the Desktop Chat Overlay. Native chat and commands are implemented in v0.4.50 development builds without a Streamer.bot dependency. Other event-driven features are being tested ahead of public release.</p>
             <a class="omsc-capability-link" href="/commands/">Explore chat commands <span aria-hidden="true">↗</span></a>
           </div>
         </article>
@@ -88,10 +92,10 @@
           </div>
         </article>
       </div>
-      <p class="feature-extra">And there's more: <strong>Stream Analytics</strong>, <a class="text-link" href="/commands/">command management</a>, <strong>Backup &amp; Restore</strong> and additional stream tools.</p>
+      <p class="feature-extra"><strong>In development for v0.4.50:</strong> native Twitch follow, subscription, gifted-subscription and Bits events with independent banner, video, image and audio options. These are not yet part of a public download. See also the <a class="text-link" href="/commands/">chat command reference</a>.</p>
     </div></section>
 
-    <section id="preview" class="preview-section section-spacing"><div class="container"><div class="section-heading split-heading"><div><span class="eyebrow">A CLOSER LOOK</span><h2>Made for real streams.</h2></div><p>From music displays to alerts and credits, explore the tools you can configure for your stream.</p></div>
+    <section id="preview" class="preview-section section-spacing"><div class="container"><div class="section-heading split-heading"><div><span class="eyebrow">A CLOSER LOOK</span><h2>Made for real streams.</h2></div><p>Try working widget demonstrations with sample data. These aren't screenshots of the configuration pages.</p></div>
     <div class="preview-shell"><div class="preview-tabs" role="tablist" aria-label="OMSC feature previews"><button class="preview-tab active" id="tab-music" role="tab" aria-selected="true" aria-controls="panel-music" tabindex="0" data-panel="music" type="button"><span>01</span> Music &amp; Widgets</button><button class="preview-tab" id="tab-alerts" role="tab" aria-selected="false" aria-controls="panel-alerts" tabindex="-1" data-panel="alerts" type="button"><span>02</span> Alerts</button><button class="preview-tab" id="tab-credits" role="tab" aria-selected="false" aria-controls="panel-credits" tabindex="-1" data-panel="credits" type="button"><span>03</span> Stream Credits</button></div>
       <div class="preview-stage">
         <section class="preview-panel active" id="panel-music" role="tabpanel" aria-labelledby="tab-music">
@@ -149,17 +153,38 @@
           <div class="preview-description"><span class="preview-type">Stream Credits</span><h3>Five ways to thank your community.</h3><p>Watch OMSC's actual Perspective Crawl, Spotlight, Retro Arcade, Terminal and Classic Roll layouts. In your installed app, Stream Credits uses locally recorded stream activity and supporters. This website preview uses sample names.</p></div>
         </section>
       </div>
-      <p class="preview-note">Spotify, Stream Credits and Alerts use their original OMSC widget renderers with website-only demonstration data. Alert videos are original silent sample media.</p>
+      <p class="preview-note">Website demonstrations use sample data, not a live OMSC connection. Music code matches the application; the other previews are being checked against current development builds. Alert media is illustrative.</p>
     </div></div></section>
 
     <section id="community" class="community-section"><div class="container community-panel"><div class="community-icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="currentColor"><path d="M26.5 7.8A24.8 24.8 0 0 0 20.4 6l-.7 1.5a22.3 22.3 0 0 0-7.4 0L11.6 6a24.8 24.8 0 0 0-6.1 1.8C1.7 13.4.6 18.9 1.1 24.3a24.8 24.8 0 0 0 7.5 3.8l1.6-2.6a15.9 15.9 0 0 1-2.4-1.2l.6-.5c4.8 2.3 10.5 2.3 15.2 0l.6.5a15.9 15.9 0 0 1-2.4 1.2l1.6 2.6a24.8 24.8 0 0 0 7.5-3.8c.7-6.2-1.3-11.7-4.4-16.5ZM11.5 20.9c-1.4 0-2.5-1.2-2.5-2.7 0-1.4 1.1-2.6 2.5-2.6s2.5 1.2 2.5 2.6c0 1.5-1.1 2.7-2.5 2.7Zm9 0c-1.4 0-2.5-1.2-2.5-2.7 0-1.4 1.1-2.6 2.5-2.6s2.5 1.2 2.5 2.6c0 1.5-1.1 2.7-2.5 2.7Z"/></svg></div><div class="community-copy"><span class="eyebrow">JOIN OUR COMMUNITY</span><h2>Life’s easier when we work together.</h2><p>Connect with other streamers, share ideas, get support and help shape the future of OMSC.</p></div><a class="btn btn-community" href="https://discord.gg/SG4fTGx7cP" target="_blank" rel="noopener noreferrer">Join our Discord <span aria-hidden="true">↗</span></a></div></section>
 
-    <section id="faq" class="faq-section section-spacing"><div class="container faq-grid"><div><span class="eyebrow">QUICK ANSWERS</span><h2>Questions?<br><span class="muted-heading">We've got you.</span></h2><p>Need help getting set up? The OMSC Discord is the best place to ask.</p><a class="text-link" href="https://discord.gg/SG4fTGx7cP" target="_blank" rel="noopener noreferrer">Visit community support <span aria-hidden="true">↗</span></a></div><div class="faq-list">
-      <details><summary>Is OMSC free?</summary><p>Yes. OldMan Stream Companion will be free to use. The public Windows download is coming soon.</p></details>
-      <details><summary>Does Desktop Chat work in fullscreen games?</summary><p>Desktop Chat supports borderless fullscreen. Exclusive Fullscreen is not supported; switch the game to Borderless Fullscreen when using the overlay.</p></details>
-      <details><summary>How do the on-stream widgets work?</summary><p>OMSC provides browser-source widgets you can add to OBS. Configure them in the application and use the relevant browser-source URL in your scene.</p></details>
-      <details><summary>Where can I get help or report a bug?</summary><p>Join the OMSC Discord community to ask questions, report problems and share feature suggestions.</p></details>
-    </div></div></section>
+    <section id="faq" class="faq-section section-spacing"><div class="container faq-grid">
+      <div><span class="eyebrow">HELP &amp; GUIDANCE</span><h2>Questions?<br><span class="muted-heading">We've got you.</span></h2><p>Guidance for getting started, connecting Twitch and OBS, configuring modules and understanding what is still in development.</p><p>These answers cover the pre-release product; tester features may change.</p><a class="text-link" href="https://discord.gg/SG4fTGx7cP" target="_blank" rel="noopener noreferrer">Ask for help on Discord <span aria-hidden="true">↗</span></a></div>
+      <div class="faq-list"><h3 class="faq-category">Availability & requirements</h3>
+<details><summary>Is OldMan Stream Companion free?</summary><p>Yes. OMSC is being developed as a free, locally run streaming companion without a monthly subscription. There is no public Windows installer available yet.</p></details>
+<details><summary>Where do I download OMSC, and is there a beta?</summary><p>The public installer is still being prepared. Some development and beta builds have been shared with testers, but they are not public releases. Check the website or <a href='https://discord.gg/SG4fTGx7cP' target='_blank' rel='noopener noreferrer'>Discord</a> for official updates.</p></details>
+<details><summary>Which operating systems are supported?</summary><p>OMSC is a Windows desktop application. A public macOS or Linux version has not been announced. Its management interface opens locally in a browser, but OMSC itself runs on Windows.</p></details>
+<details><summary>Do I need Twitch, OBS or Spotify?</summary><p>Twitch is needed for Twitch interactions; OBS Studio is used for on-stream browser sources and OBS integration. Spotify is optional and needed only for Spotify functionality. Choose the modules that suit your setup.</p></details>
+<h3 class="faq-category">Getting connected</h3>
+<details><summary>Does OMSC require Streamer.bot?</summary><p>v0.4.50 is replacing Streamer.bot dependencies with native Twitch chat, commands and event handling. Earlier tester builds may still depend on it for some actions. This native-only migration is still being tested and is not yet publicly released.</p></details>
+<details><summary>How do I connect my Twitch accounts?</summary><p>Open Connections in OMSC and follow the Twitch authorisation process for your broadcaster. You may also connect a separate Twitch account for chat messages. It is optional: supported messages can use the broadcaster account when no separate account is connected.</p></details>
+<details><summary>How do I add a widget to OBS?</summary><p>Start OMSC and copy the Browser Source URL displayed in the widget's settings. Add a Browser Source to your OBS scene and paste the URL. OMSC needs to stay running because the widget is served locally.</p></details>
+<details><summary>Why isn't an overlay or widget appearing in OBS?</summary><p>Confirm OMSC is running, the module is enabled, and the OBS Browser Source has the current URL. Refresh the source. For features that control OBS directly, also check the OBS WebSocket connection and scene/source settings.</p></details>
+<details><summary>Does Desktop Chat work with fullscreen games?</summary><p>Desktop Chat supports <strong>borderless fullscreen</strong> games using a movable, click-through overlay. Exclusive fullscreen is <strong>not supported</strong>. Switch your game to Borderless Fullscreen.</p></details>
+<h3 class="faq-category">Music, commands & stream events</h3>
+<details><summary>Do I need Spotify Premium?</summary><p>Spotify Premium is required for Spotify playback and related music-control features. You can use modules that do not depend on Spotify without connecting Spotify.</p></details>
+<details><summary>Can viewers request songs?</summary><p>Yes, when Song Requests are enabled and configured. Depending on the streamer's setup, requests can use supported chat commands or Twitch Channel Points. The streamer controls queue behaviour and availability.</p></details>
+<details><summary>Can I rename commands or change the prefix?</summary><p>Yes. OMSC provides configurable command names, prefixes, permissions and per-command enablement. The <a href='/commands/'>Commands page</a> shows the default names; the working commands in a channel can differ.</p></details>
+<details><summary>What's the difference between custom Alerts and native Twitch Events?</summary><p>Custom Alerts play your selected media, including supported Channel Point triggers. Native Twitch Events react to follows, subscriptions, gifted subs and Bits. The expanded native events editor is in v0.4.50 development, not a public release.</p></details>
+<details><summary>Can I customise Shoutouts and Raid Welcome?</summary><p>Yes. The application provides configurable shoutout and raid banners with profile, text, layout and media controls. Some advanced design and media options are still being refined in development builds.</p></details>
+<details><summary>What do Stream Credits and Stream Analytics record?</summary><p>Stream Credits uses locally recorded participation and supporter events for end-of-stream displays. Stream Analytics keeps local records of stream sessions. The available detail depends on the modules enabled and activity recorded.</p></details>
+<h3 class="faq-category">Privacy, backups & help</h3>
+<details><summary>Does all my data stay on my computer?</summary><p>OMSC stores its settings and many stream records locally. Optional online integrations with Twitch, Spotify, Discord and the Streamer Directory exchange data needed to provide their services. Running locally does not mean those integrations are offline.</p></details>
+<details><summary>Can I back up and restore my settings?</summary><p>OMSC includes Backup & Restore for supported settings and data, with archive validation and recovery safeguards. Make a backup before major changes, and check restored account connections afterwards.</p></details>
+<details><summary>Am I automatically listed in the Streamer Directory?</summary><p>No. The Streamer Directory is opt-in and off by default. You choose whether to participate in discovery by other OMSC streamers.</p></details>
+<details><summary>Does OMSC include a full moderation or loyalty bot?</summary><p>Not in v0.4.50. Native commands and events are separate from the proposed modular OMSC Bot. Full moderation, loyalty and games functionality belongs to a later roadmap discussion, not the upcoming release.</p></details>
+<details><summary>Where can I get help, report a bug or suggest a feature?</summary><p>Join the <a href='https://discord.gg/SG4fTGx7cP' target='_blank' rel='noopener noreferrer'>OMSC Discord</a>. Include your build version, steps to reproduce and a screenshot where helpful. Never share Twitch or Spotify access tokens or passwords.</p></details></div>
+    </div></section>
 
     <section id="download" class="download-section"><div class="container download-shell"><div class="download-decoration download-decoration-left" aria-hidden="true"></div><div class="download-decoration download-decoration-right" aria-hidden="true"></div><div class="download-content"><span class="eyebrow">PUBLIC WINDOWS RELEASE</span><h2>OMSC is coming soon.</h2><p>We're preparing the public Windows release of OldMan Stream Companion. The app will be free to use, run locally on your computer, and have no monthly subscription.</p><div class="download-actions"><span class="launch-download-tag" role="status"><span class="launch-coming-soon-dot" aria-hidden="true"></span> Windows download · Coming Soon</span><a class="btn btn-outline" href="https://discord.gg/SG4fTGx7cP" target="_blank" rel="noopener noreferrer">Get updates on Discord <span aria-hidden="true">↗</span></a></div><p class="release-note">No public installer is available yet. We'll enable downloads here when it's ready.</p></div></div></section>
   </main>
