@@ -289,3 +289,14 @@
 
 /* Guarantee category panels stay hidden until opened, including with stale styles. */
 .faq-group-panel[hidden]{display:none!important}
+
+/* Native FAQ accordion: works with JavaScript disabled or cached. */
+.faq-list > details.faq-group{margin:0;padding:0;border-top:1px solid var(--border);border-bottom:0}
+.faq-list > details.faq-group:last-child{border-bottom:1px solid var(--border)}
+.faq-list > details.faq-group > summary.faq-category-summary{display:flex;align-items:center;justify-content:space-between;gap:16px;list-style:none;cursor:pointer;padding:20px 8px 20px 2px;color:#b5a2ff;font-size:1rem;font-weight:800;line-height:1.4}
+.faq-list > details.faq-group > summary.faq-category-summary::-webkit-details-marker{display:none}
+.faq-list > details.faq-group > summary.faq-category-summary::after{content:'+';position:static;font-size:1.45rem;line-height:1;font-weight:400;color:#b5a2ff}
+.faq-list > details.faq-group[open] > summary.faq-category-summary::after{content:'−'}
+.faq-list > details.faq-group > .faq-category-questions{padding-left:12px}
+.faq-list > details.faq-group > .faq-category-questions > details:last-child{border-bottom:0}
+@media(max-width:520px){.faq-list > details.faq-group > summary.faq-category-summary{font-size:.93rem;padding:18px 8px 18px 2px}}
