@@ -261,9 +261,21 @@ window.addEventListener('resize', sizeMusicFrame);
 refreshLiveDemos();
 sizeMusicFrame();
 
-// FAQ topic accordion: ensure only one heading can be expanded at once.
-const faqTopics = document.querySelectorAll('.faq-list > details.faq-group');
-faqTopics.forEach(topic => topic.addEventListener('toggle', () => {
-  if (!topic.open) return;
-  faqTopics.forEach(other => { if (other !== topic) other.open = false; });
-}));
+
+// FAQ category accordion: all collapsed initially, only one open at a time.
+const faqGroupButtons = [...document.querySelectorAll('.faq-group-button')];
+faqGroupButtons.forEach(button => {
+  const panel = document.getElementById(button.getAttribute('aria-controls'));
+  if (!panel) return;
+  panel.hidden = true;
+  button.setAttribute('aria-expanded', 'false');
+  button.addEventListener('click', () => {
+    const opening = button.getAttribute('aria-expanded') !== 'true';
+    faqGroupButtons.forEach(other => {
+      other.setAttribute('aria-expanded', 'false');
+      const otherPanel = document.getElementById(other.getAttribute('aria-controls'));
+      if (otherPanel) otherPanel.hidden = true;
+    });
+    if (opening) { panel.hidden = false; button.setAttribute('aria-expanded', 'true'); }
+  });
+});
