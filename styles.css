@@ -313,3 +313,6 @@
   .demo-label{flex-wrap:wrap;gap:5px 10px}
   .demo-label span:last-child{white-space:normal}
 }
+
+/* Increase contrast of the small preview tab numbers on dark panels. */
+.preview-tab span{color:#afc0e2}

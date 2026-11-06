@@ -15,5 +15,13 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Validate homepage, commands and illustration
+      - name: Validate public pages, accessibility and launch safeguards
         run: node tests/site-native-preview.test.cjs
+      - name: Validate website JavaScript syntax
+        shell: pwsh
+        run: |
+          $scripts = Get-ChildItem -Recurse -File | Where-Object { $_.Extension -in '.js', '.cjs' }
+          foreach ($script in $scripts) {
+            node --check $script.FullName
+            if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          }

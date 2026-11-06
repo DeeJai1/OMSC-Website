@@ -117,4 +117,28 @@ assert.match(css, /[.]widget-choice\{min-height:44px/);
 assert.match(css, /[.]menu-toggle\{width:44px;height:44px/);
 assert.match(css, /[.]demo-controls button\{min-height:44px/);
 
+
+// Basic HTML accessibility invariants for each public document.
+// Keep this fast and dependency-free; real-browser visual testing is separate.
+for (const page of publishedPages) {
+  const markup = page.markup;
+  const ids = [...markup.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]);
+  assert.equal(ids.length, new Set(ids).size, page.file + ' has duplicate IDs');
+  for (const img of markup.match(/<img\b[^>]*>/g) || []) {
+    assert.match(img, /\balt="[^"]*"/, page.file + ' has an image without alternative text');
+  }
+  for (const frame of markup.match(/<iframe\b[^>]*>/g) || []) {
+    assert.match(frame, /\btitle="[^"]+"/, page.file + ' has an unnamed iframe');
+  }
+  for (const ref of markup.matchAll(/\b(?:aria-controls|aria-labelledby)="([^"]+)"/g)) {
+    for (const id of ref[1].split(/\s+/)) {
+      assert.ok(ids.includes(id), page.file + ' references missing ID ' + id);
+    }
+  }
+  for (const external of markup.match(/<a\b[^>]*target="_blank"[^>]*>/g) || []) {
+    assert.match(external, /\brel="[^"]*\bnoopener\b/, page.file + ' has an unprotected new-window link');
+  }
+}
+assert.match(css, /[.]preview-tab span\{color:#afc0e2\}/);
+
 console.log('PASS: website links, accessible mobile navigation, previews, FAQ, sitemap and launch safeguards.');
