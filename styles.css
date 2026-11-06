@@ -254,3 +254,10 @@
 @media (max-width: 520px) {
   .omsc-capability-symbol.twitch-symbol .omsc-brand-icon { width: 35px; height: 35px; }
 }
+
+/* Grouped FAQ: headings divide topics while preserving expandable questions. */
+.faq-list{border-top:0}
+.faq-group{margin-bottom:28px;border-top:1px solid var(--border)}
+.faq-group-heading{font-size:1rem;letter-spacing:.015em;color:#b5a2ff;font-weight:800;line-height:1.4;margin:0;padding:18px 2px 7px}
+.faq-group details:last-child{border-bottom:1px solid var(--border)}
+@media(max-width:520px){.faq-group{margin-bottom:23px}.faq-group-heading{font-size:.93rem;padding-top:16px}}
