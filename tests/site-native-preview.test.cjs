@@ -46,7 +46,7 @@ assert.match(beta, /Help → Beta Access/);
 assert.doesNotMatch(beta, /<form\b/i);
 assert.match(beta, /aria-controls="site-nav"/);
 assert.match(beta, /<nav id="site-nav" class="site-nav"/);
-assert.match(beta, /src="\/commands\/commands[.]js"/);
+assert.match(beta, /src="\/commands\/commands[.]js(?:\?[^\"]*)?"/);
 assert.match(read('commands/commands.js'), /nav[.]classList[.]toggle\("open"\)/);
 assert.match(beta, /Beta participation requests are made inside OMSC/);
 assert.doesNotMatch(beta, /website application form is not yet connected/i);
