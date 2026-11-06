@@ -272,3 +272,17 @@
 .faq-list > .faq-group > details{padding-left:12px}
 .faq-list > .faq-group > details:last-child{border-bottom:0}
 @media(max-width:520px){.faq-list > .faq-group > .faq-group-heading{font-size:.93rem;padding:18px 36px 18px 2px}}
+
+/* FAQ category panels: hide all questions until a heading is selected. */
+.faq-list > .faq-group{padding:0;border-top:1px solid var(--border);margin:0}
+.faq-list > .faq-group:last-child{border-bottom:1px solid var(--border)}
+.faq-group-title{margin:0;font-size:inherit;letter-spacing:normal}
+.faq-group-button{display:flex;align-items:center;justify-content:space-between;gap:16px;width:100%;padding:20px 8px 20px 2px;border:0;background:transparent;color:#b5a2ff;font-size:1rem;font-weight:800;text-align:left;cursor:pointer;line-height:1.4}
+.faq-group-button:hover{color:#d1c4ff}
+.faq-group-indicator{font-size:1.45rem;font-weight:400;line-height:1}
+.faq-group-button[aria-expanded="true"] .faq-group-indicator{font-size:0}
+.faq-group-button[aria-expanded="true"] .faq-group-indicator::after{content:'−';font-size:1.45rem}
+.faq-group-panel[hidden]{display:none!important}
+.faq-group-panel > details{padding-left:12px}
+.faq-group-panel > details:last-child{border-bottom:0}
+@media(max-width:520px){.faq-group-button{font-size:.93rem;padding:18px 8px 18px 2px}}
