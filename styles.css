@@ -300,3 +300,16 @@
 .faq-list > details.faq-group > .faq-category-questions{padding-left:12px}
 .faq-list > details.faq-group > .faq-category-questions > details:last-child{border-bottom:0}
 @media(max-width:520px){.faq-list > details.faq-group > summary.faq-category-summary{font-size:.93rem;padding:18px 8px 18px 2px}}
+/* Mobile & keyboard accessibility: preserve existing layout and widget renderers. */
+@media(max-width:800px){
+  .menu-toggle{width:44px;height:44px;flex:none}
+  .site-nav > a{display:flex;align-items:center;min-height:44px}
+}
+.widget-choice{min-height:44px;padding:9px 12px}
+.demo-controls button{min-height:44px;padding:10px 8px}
+@media(max-width:520px){
+  .widget-choice,.credits-widget-choices .widget-choice{font-size:.73rem;padding:9px 10px}
+  .demo-controls{flex-wrap:wrap;gap:6px 12px}
+  .demo-label{flex-wrap:wrap;gap:5px 10px}
+  .demo-label span:last-child{white-space:normal}
+}

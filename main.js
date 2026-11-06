@@ -15,7 +15,12 @@ if (menuButton && mainNav) {
     mainNav.classList.toggle('open', opening);
   });
   mainNav.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
-  document.addEventListener('keydown', event => { if (event.key === 'Escape') closeMenu(); });
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && mainNav.classList.contains('open')) {
+      closeMenu();
+      menuButton.focus();
+    }
+  });
   document.addEventListener('click', event => { if (!mainNav.contains(event.target) && !menuButton.contains(event.target)) closeMenu(); });
 }
 

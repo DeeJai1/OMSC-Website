@@ -12,8 +12,8 @@
   <meta property="og:url" content="https://www.oldmanstreamcompanion.com/">
   <link rel="canonical" href="https://www.oldmanstreamcompanion.com/">
   <link rel="icon" href="assets/omsc-favicon.png" type="image/png">
-  <link rel="stylesheet" href="styles.css?v=faq-indicators-1">
-  <script defer src="main.js?v=faq-native-3"></script>
+  <link rel="stylesheet" href="styles.css?v=a11y-1">
+  <script defer src="main.js?v=a11y-1"></script>
   <title>Your stream has enough moving parts already. | OldMan Stream Companion</title>
 </head>
 <body>
@@ -99,7 +99,7 @@
         <section class="preview-panel active" id="panel-music" role="tabpanel" aria-labelledby="tab-music">
           <div class="omsc-demo-wrap">
             <div class="demo-label"><span>REAL OMSC WIDGET · DEMONSTRATION DATA</span><span aria-hidden="true">● Animated</span></div>
-            <div class="live-widget-viewport"><iframe id="music-demo-iframe" title="Actual OldMan Stream Companion Now Playing widget preview" loading="lazy" referrerpolicy="no-referrer" data-demo-type="music"></iframe></div>
+            <div class="live-widget-viewport"><iframe id="music-demo-iframe" title="Actual OldMan Stream Companion Now Playing widget preview" loading="lazy" referrerpolicy="no-referrer" tabindex="-1" data-demo-type="music"></iframe></div>
             <div class="widget-choices" role="group" aria-label="Choose Spotify widget layout">
               <button type="button" class="widget-choice active" data-widget-layout="EqualiserTower" aria-pressed="true">EQ Tower</button>
               <button type="button" class="widget-choice" data-widget-layout="VinylPlayer" aria-pressed="false">Vinyl</button>
@@ -115,7 +115,7 @@
           <div class="omsc-demo-wrap alerts-demo-wrap">
             <div class="demo-label"><span>OMSC ALERTS · LOCALLY HOSTED SAMPLE MEDIA</span><span aria-hidden="true">● Audio only on request</span></div>
             <div class="live-widget-viewport alerts-widget-viewport">
-              <iframe id="alerts-demo-iframe" title="Original OMSC Alerts renderer demonstrating a silent custom video" loading="lazy" referrerpolicy="no-referrer" data-demo-type="alerts"></iframe>
+              <iframe id="alerts-demo-iframe" title="Original OMSC Alerts renderer demonstrating a silent custom video" loading="lazy" referrerpolicy="no-referrer" tabindex="-1" data-demo-type="alerts"></iframe>
               <div class="alerts-audio-stage" id="alerts-audio-stage" hidden>
                 <div class="alerts-sound-card">
                   <div class="alerts-sound-icon" aria-hidden="true">♫</div>
@@ -138,7 +138,7 @@
         <section class="preview-panel" id="panel-credits" role="tabpanel" aria-labelledby="tab-credits" hidden>
           <div class="omsc-demo-wrap credits-demo-wrap">
             <div class="demo-label"><span>REAL OMSC STREAM CREDITS · DEMONSTRATION DATA</span><span aria-hidden="true">● Animated</span></div>
-            <div class="live-widget-viewport credits-widget-viewport"><iframe id="credits-demo-iframe" title="Actual OMSC Stream Credits layout preview" loading="lazy" referrerpolicy="no-referrer" data-demo-type="credits"></iframe></div>
+            <div class="live-widget-viewport credits-widget-viewport"><iframe id="credits-demo-iframe" title="Actual OMSC Stream Credits layout preview" loading="lazy" referrerpolicy="no-referrer" tabindex="-1" data-demo-type="credits"></iframe></div>
             <div class="widget-choices credits-widget-choices" role="group" aria-label="Choose Stream Credits layout">
               <button type="button" class="widget-choice active" data-credits-layout="PerspectiveCrawl" aria-pressed="true">Perspective Crawl</button>
               <button type="button" class="widget-choice" data-credits-layout="Spotlight" aria-pressed="false">Spotlight</button>

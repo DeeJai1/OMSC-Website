@@ -4,16 +4,25 @@
   const menuButton = document.querySelector(".menu-toggle");
   const nav = document.getElementById("site-nav");
   if (menuButton && nav) {
+    const closeMenu = (returnFocus = false) => {
+      nav.classList.remove("open");
+      menuButton.setAttribute("aria-expanded", "false");
+      menuButton.setAttribute("aria-label", "Open navigation menu");
+      if (returnFocus) menuButton.focus();
+    };
     menuButton.addEventListener("click", () => {
       const isOpen = nav.classList.toggle("open");
       menuButton.setAttribute("aria-expanded", String(isOpen));
       menuButton.setAttribute("aria-label", isOpen ? "Close navigation menu" : "Open navigation menu");
     });
-    nav.querySelectorAll("a").forEach(link => link.addEventListener("click", () => {
-      nav.classList.remove("open");
-      menuButton.setAttribute("aria-expanded", "false");
-      menuButton.setAttribute("aria-label", "Open navigation menu");
-    }));
+    nav.querySelectorAll("a").forEach(link =>
+      link.addEventListener("click", () => closeMenu()));
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape" && nav.classList.contains("open")) closeMenu(true);
+    });
+    document.addEventListener("click", event => {
+      if (!nav.contains(event.target) && !menuButton.contains(event.target)) closeMenu();
+    });
   }
 
   const year = document.getElementById("year");

@@ -96,4 +96,25 @@ for (const page of publishedPages) {
   }
 }
 
-console.log('PASS: website assets, internal navigation, metadata, sitemap, FAQ and launch safeguards.');
+
+// Accessible navigation and previews: keyboard dismisses menus, focus returns
+// to the toggle and display-only iframes stay outside the Tab sequence.
+const homeScript = read('main.js');
+const sharedNavScript = read('commands/commands.js');
+for (const [name, markup] of [['home', home], ['commands', commands], ['beta', beta]]) {
+  assert.match(markup, /class="menu-toggle"/, name + ' requires a mobile menu control');
+  assert.match(markup, /aria-controls="site-nav"/);
+  assert.match(markup, /<a class="skip-link" href="#main">/);
+  assert.equal((markup.match(/<h1\b/g) || []).length, 1, name + ' needs one main heading');
+}
+assert.match(homeScript, /event[.]key === 'Escape' && mainNav[.]classList[.]contains\('open'\)/);
+assert.match(homeScript, /menuButton[.]focus\(\)/);
+assert.match(sharedNavScript, /event[.]key === "Escape" && nav[.]classList[.]contains\("open"\)/);
+assert.match(sharedNavScript, /closeMenu\(true\)/);
+assert.match(sharedNavScript, /!nav[.]contains\(event[.]target\)/);
+assert.equal((home.match(/<iframe\b[^>]*tabindex="-1"[^>]*><\/iframe>/g) || []).length, 3);
+assert.match(css, /[.]widget-choice\{min-height:44px/);
+assert.match(css, /[.]menu-toggle\{width:44px;height:44px/);
+assert.match(css, /[.]demo-controls button\{min-height:44px/);
+
+console.log('PASS: website links, accessible mobile navigation, previews, FAQ, sitemap and launch safeguards.');
