@@ -34,4 +34,13 @@ assert.doesNotMatch(css, /[.]faq-list details\[open\] summary::after/);
 // Beta applications remain in the desktop app, not a website form.
 assert.match(beta, /Help → Beta Access/);
 assert.doesNotMatch(beta, /<form\b/i);
-console.log('PASS: actual dashboard, native commands, nested FAQ indicators and in-app beta access.');
+assert.match(beta, /aria-controls="site-nav"/);
+assert.match(beta, /<nav id="site-nav" class="site-nav"/);
+assert.match(beta, /src="\/commands\/commands[.]js"/);
+assert.match(read('commands/commands.js'), /nav[.]classList[.]toggle\("open"\)/);
+assert.match(beta, /Beta participation requests are made inside OMSC/);
+assert.doesNotMatch(beta, /website application form is not yet connected/i);
+assert.match(home, /Download coming soon/);
+assert.match(home, /Windows download · Coming Soon/);
+assert.doesNotMatch(home, /OldManStreamCompanion-Setup-[0-9]/);
+console.log('PASS: actual dashboard, commands, FAQ toggles, beta mobile navigation and Coming Soon safeguards.');
