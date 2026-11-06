@@ -260,3 +260,10 @@ document.addEventListener('visibilitychange', refreshLiveDemos);
 window.addEventListener('resize', sizeMusicFrame);
 refreshLiveDemos();
 sizeMusicFrame();
+
+// FAQ topic accordion: ensure only one heading can be expanded at once.
+const faqTopics = document.querySelectorAll('.faq-list > details.faq-group');
+faqTopics.forEach(topic => topic.addEventListener('toggle', () => {
+  if (!topic.open) return;
+  faqTopics.forEach(other => { if (other !== topic) other.open = false; });
+}));
