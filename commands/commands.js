@@ -46,23 +46,5 @@
     refresh();
   }
 
-  document.querySelectorAll(".command-copy").forEach(button => {
-    button.addEventListener("click", async () => {
-      const text = button.getAttribute("data-copy");
-      if (!text) return;
-      try {
-        if (!navigator.clipboard || typeof navigator.clipboard.writeText !== "function") throw new Error("Clipboard unavailable");
-        await navigator.clipboard.writeText(text);
-        button.textContent = "Copied!";
-        button.setAttribute("aria-label", "Copied " + text);
-        window.setTimeout(() => {
-          button.textContent = "Copy";
-          button.setAttribute("aria-label", "Copy " + text);
-        }, 1700);
-      } catch (_) {
-        button.textContent = "Select text";
-        button.setAttribute("aria-label", "Select the command shown beside this button to copy it");
-      }
-    });
-  });
+
 })();

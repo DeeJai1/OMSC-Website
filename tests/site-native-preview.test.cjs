@@ -23,6 +23,16 @@ assert.doesNotMatch(home, /streamerbot-symbol|streamer[.]bot\/downloads/i);
 assert.match(home, /Streamer[.]bot is not required/);
 assert.doesNotMatch(commands, /Some event-driven commands still await native migration/);
 
+const commandCss = read('commands/commands.css');
+const commandJs = read('commands/commands.js');
+assert.equal((commands.match(/<article class="command-card">/g) || []).length, 24);
+assert.match(commands, /These are example command names, not guaranteed chat triggers/);
+assert.match(commands, /Streamers can change the prefix, rename or disable commands/);
+assert.doesNotMatch(commands, /class="command-copy"|data-copy=|>Copy<\/button>/);
+assert.doesNotMatch(commandCss, /[.]command-copy/);
+assert.doesNotMatch(commandJs, /command-copy|navigator[.]clipboard/);
+assert.match(commandCss, /[.]commands-grid\{display:grid;grid-template-columns:repeat\(4,minmax\(0,1fr\)\)/);
+
 // FAQ categories and questions use nested native details; an opened category
 // must not give all of its still-closed questions the minus indicator.
 assert.equal((home.match(/<details class="faq-group" name="faq-categories">/g) || []).length, 6);
