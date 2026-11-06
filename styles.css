@@ -286,3 +286,6 @@
 .faq-group-panel > details{padding-left:12px}
 .faq-group-panel > details:last-child{border-bottom:0}
 @media(max-width:520px){.faq-group-button{font-size:.93rem;padding:18px 8px 18px 2px}}
+
+/* Guarantee category panels stay hidden until opened, including with stale styles. */
+.faq-group-panel[hidden]{display:none!important}
