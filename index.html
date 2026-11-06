@@ -156,40 +156,40 @@
     <section id="community" class="community-section"><div class="container community-panel"><div class="community-icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="currentColor"><path d="M26.5 7.8A24.8 24.8 0 0 0 20.4 6l-.7 1.5a22.3 22.3 0 0 0-7.4 0L11.6 6a24.8 24.8 0 0 0-6.1 1.8C1.7 13.4.6 18.9 1.1 24.3a24.8 24.8 0 0 0 7.5 3.8l1.6-2.6a15.9 15.9 0 0 1-2.4-1.2l.6-.5c4.8 2.3 10.5 2.3 15.2 0l.6.5a15.9 15.9 0 0 1-2.4 1.2l1.6 2.6a24.8 24.8 0 0 0 7.5-3.8c.7-6.2-1.3-11.7-4.4-16.5ZM11.5 20.9c-1.4 0-2.5-1.2-2.5-2.7 0-1.4 1.1-2.6 2.5-2.6s2.5 1.2 2.5 2.6c0 1.5-1.1 2.7-2.5 2.7Zm9 0c-1.4 0-2.5-1.2-2.5-2.7 0-1.4 1.1-2.6 2.5-2.6s2.5 1.2 2.5 2.6c0 1.5-1.1 2.7-2.5 2.7Z"/></svg></div><div class="community-copy"><span class="eyebrow">JOIN OUR COMMUNITY</span><h2>Life’s easier when we work together.</h2><p>Connect with other streamers, share ideas, get support and help shape the future of OMSC.</p></div><a class="btn btn-community" href="https://discord.gg/SG4fTGx7cP" target="_blank" rel="noopener noreferrer">Join our Discord <span aria-hidden="true">↗</span></a></div></section>
 
     <section id="faq" class="faq-section section-spacing"><div class="container faq-grid"><div><span class="eyebrow">HELP &amp; FAQ</span><h2>Questions?<br><span class="muted-heading">We've got you.</span></h2><p>Getting started, connecting accounts or fixing a problem? These are the most common things to check. For more help, visit our Discord community.</p><a class="text-link" href="https://discord.gg/SG4fTGx7cP" target="_blank" rel="noopener noreferrer">Visit community support <span aria-hidden="true">↗</span></a></div><div class="faq-list">
-      <section class="faq-group" aria-labelledby="faq-group-1">
-        <h3 class="faq-group-heading" id="faq-group-1">General & Getting Started</h3>
+      <details class="faq-group" name="faq-topics">
+        <summary class="faq-group-heading"><span id="faq-group-1">General & Getting Started</span></summary>
         <details><summary>What is OldMan Stream Companion?</summary><p>OMSC is a Windows desktop companion for Twitch streamers. It brings together chat commands, OBS integration, Spotify and song requests, custom alerts, shoutouts, raid welcomes, stream credits, analytics and other tools in one application.</p></details>
         <details><summary>Is OMSC free? Where can I download it?</summary><p>OMSC is designed to be free to use, without a monthly subscription. The official public download section on this website will provide the stable Windows installer when public distribution is enabled. Do not download installers from unofficial links. Beta participation is handled separately through <a href="/beta/">Beta Access</a>.</p></details>
         <details><summary>Does OMSC require Streamer.bot?</summary><p>No. OMSC v0.4.50 uses native Twitch connections for its own chat commands and event handling. Streamer.bot is not required for these features. If you previously used Streamer.bot to run the same OMSC commands, disable those duplicate actions to avoid double responses. You can continue using Streamer.bot for unrelated automations.</p></details>
-      </section>
-      <section class="faq-group" aria-labelledby="faq-group-2">
-        <h3 class="faq-group-heading" id="faq-group-2">Connections & Integrations</h3>
+      </details>
+      <details class="faq-group" name="faq-topics">
+        <summary class="faq-group-heading"><span id="faq-group-2">Connections & Integrations</span></summary>
         <details><summary>How do I connect my Twitch broadcaster and bot accounts?</summary><p>Open the Connections area in OMSC and authorise your broadcaster Twitch account. If you want OMSC chat messages to come from a different username, connect a separate Twitch bot account as well. These are distinct accounts and each needs its own authorisation. Check their connection status before testing commands.</p></details>
         <details><summary>How do I connect OBS?</summary><p>In OBS Studio, enable its WebSocket server and note the server port and password. Enter the matching connection details in OMSC's OBS connection settings, then test the connection with OBS running. For on-stream widgets, add the browser-source URL supplied by OMSC to the appropriate OBS scene.</p></details>
         <details><summary>How do I connect Discord?</summary><p>Use OMSC's Discord connection settings and follow the authorisation or configuration prompts shown there. Discord integration is separate from your Twitch broadcaster and bot connections. Check the connection status in OMSC after setup.</p></details>
         <details><summary>How do Spotify and song requests work?</summary><p>Connect Spotify in OMSC and configure the music and request features you want to use. Depending on your settings, viewers can request tracks through supported chat commands or Channel Point redeems. You can manage the request queue and use OBS browser-source widgets to show what's playing. Spotify account capabilities and playback availability still depend on Spotify.</p></details>
-      </section>
-      <section class="faq-group" aria-labelledby="faq-group-3">
-        <h3 class="faq-group-heading" id="faq-group-3">Commands & Chat</h3>
+      </details>
+      <details class="faq-group" name="faq-topics">
+        <summary class="faq-group-heading"><span id="faq-group-3">Commands & Chat</span></summary>
         <details><summary>How do Twitch commands work?</summary><p>OMSC handles supported commands natively. Streamers can configure the global prefix, rename or disable commands, and control whether commands are available to everyone or moderators. Some commands can run without the global prefix. The <a href="/commands/">command reference</a> shows examples; actual triggers depend on each streamer's configuration.</p></details>
         <details><summary>Why isn't a chat command responding?</summary><p>Check that the Twitch broadcaster connection is active, the command and its related feature are enabled, the correct prefix or renamed trigger is being used, and the viewer has the required permissions. If using a separate bot account, confirm it is connected. Also check cooldowns and avoid running duplicate commands through Streamer.bot.</p></details>
         <details><summary>Does Desktop Chat work in fullscreen games?</summary><p>Desktop Chat supports windowed and borderless fullscreen games. Exclusive fullscreen is not supported by the overlay; change the game's display mode to Borderless Fullscreen if you need chat on top of the game.</p></details>
-      </section>
-      <section class="faq-group" aria-labelledby="faq-group-4">
-        <h3 class="faq-group-heading" id="faq-group-4">Alerts, Events & Stream Features</h3>
+      </details>
+      <details class="faq-group" name="faq-topics">
+        <summary class="faq-group-heading"><span id="faq-group-4">Alerts, Events & Stream Features</span></summary>
         <details><summary>How do I set up custom alerts, shoutouts and raid welcomes?</summary><p>Use the relevant editor in OMSC to enable the feature, choose its audio or video media and configure how it appears. For visual elements, adjust placement and sizing in the preview, then use the browser-source URL provided by OMSC in OBS. Test the result before going live. Available controls vary by feature.</p></details>
         <details><summary>Can I customise Twitch follow, sub, gift and Bits events?</summary><p>OMSC provides native Twitch event handling and configurable visual and audio layers for supported event types. Use the Events editor to enable the events you want and customise their appearance, timing and sound. The available events depend on your Twitch account and the event permissions granted.</p></details>
-      </section>
-      <section class="faq-group" aria-labelledby="faq-group-5">
-        <h3 class="faq-group-heading" id="faq-group-5">Data, Updates & Beta Access</h3>
+      </details>
+      <details class="faq-group" name="faq-topics">
+        <summary class="faq-group-heading"><span id="faq-group-5">Data, Updates & Beta Access</span></summary>
         <details><summary>Where is my stream data stored? Can I back it up?</summary><p>OMSC keeps application settings and supported stream records locally on your Windows computer. Use the application's Backup &amp; Restore tools before major changes or reinstalling. Keep a separate copy of important backups and check that it matches the version you plan to use.</p></details>
         <details><summary>Can I roll back through the updater?</summary><p>No. The updater is intended for forward updates, not automatic downgrades. If an update causes a problem, check for a newer fix and contact OMSC support before attempting a manual reinstall. Preserve your settings backup.</p></details>
         <details><summary>How do I request beta access?</summary><p>In OMSC, open <strong>Help → Beta Access → Request Beta Participation</strong>. Submit your request with your connected Twitch identity and Discord username. Applications are reviewed; a request does not guarantee approval. See the <a href="/beta/">Beta Access page</a> for details.</p></details>
-      </section>
-      <section class="faq-group" aria-labelledby="faq-group-6">
-        <h3 class="faq-group-heading" id="faq-group-6">Help & Troubleshooting</h3>
+      </details>
+      <details class="faq-group" name="faq-topics">
+        <summary class="faq-group-heading"><span id="faq-group-6">Help & Troubleshooting</span></summary>
         <details><summary>Where can I get help, report bugs or suggest features?</summary><p>Join the <a href="https://discord.gg/SG4fTGx7cP" target="_blank" rel="noopener noreferrer">OMSC Discord community</a>. Include the OMSC version, what you were trying to do and any relevant error message or steps to reproduce the problem. Never share access tokens, passwords or other private credentials.</p></details>
-      </section>
+      </details>
     </div></div></section>
 
     <section id="download" class="download-section"><div class="container download-shell"><div class="download-decoration download-decoration-left" aria-hidden="true"></div><div class="download-decoration download-decoration-right" aria-hidden="true"></div><div class="download-content"><span class="eyebrow">PUBLIC WINDOWS RELEASE</span><h2>OMSC public download</h2><p>We're preparing the public Windows release of OldMan Stream Companion. The app will be free to use, run locally on your computer, and have no monthly subscription.</p><div class="download-actions"><span class="launch-download-tag" role="status"><span class="launch-coming-soon-dot" aria-hidden="true"></span> Windows download · Coming Soon</span><a class="btn btn-outline" href="https://discord.gg/SG4fTGx7cP" target="_blank" rel="noopener noreferrer">Get updates on Discord <span aria-hidden="true">↗</span></a></div><p class="release-note">Public downloads will be linked here when the official stable release distribution is ready. Beta participation is separate: <a href="/beta/">request beta access</a>.</p></div></div></section>
