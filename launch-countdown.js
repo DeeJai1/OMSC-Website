@@ -11,13 +11,12 @@
   function render() {
     // Re-read the system clock rather than decrementing a counter: sleeping tabs
     // and computer clock changes must not accumulate drift or show negative time.
-    const remaining = Math.max(0, Math.ceil((launchAt - Date.now()) / 1000));
-    const days = Math.floor(remaining / 86400);
-    const hours = Math.floor(remaining % 86400 / 3600);
-    const minutes = Math.floor(remaining % 3600 / 60);
-    const seconds = remaining % 60;
-    const two = value => String(value).padStart(2, "0");
-    const countdown = `${two(days)}d ${two(hours)}h ${two(minutes)}m ${two(seconds)}s`;
+    const remaining = Math.max(0, launchAt - Date.now());
+    const days = Math.floor(remaining / 86400000);
+    // Keep the final partial day accurate without showing hours or reaching zero early.
+    const countdown = remaining > 0 && days === 0
+      ? "Less than 1 day"
+      : `${days} ${days === 1 ? "day" : "days"} to launch`;
     for (const badge of badges) badge.querySelector(".launch-countdown-value").textContent = countdown;
   }
 
@@ -31,7 +30,7 @@
     for (const time of localDates) { time.dateTime = launchISO; time.textContent = local; }
     for (const badge of badges) {
       badge.title = "Public launch: " + local;
-      // Announce the exact local date once; do not read ticking seconds aloud.
+      // Announce the exact local date once; do not repeatedly announce the changing countdown.
       badge.setAttribute("aria-label", "Public launch: " + local);
     }
     for (const hint of document.querySelectorAll("[data-launch-local-hint]")) hint.hidden = false;
@@ -39,7 +38,7 @@
   }
 
   refresh();
-  setInterval(render, 1000);
+  setInterval(render, 60000);
   window.addEventListener("focus", refresh);
   window.addEventListener("pageshow", refresh);
   document.addEventListener("visibilitychange", () => { if (!document.hidden) refresh(); });

@@ -50,7 +50,7 @@ test("one Adelaide daylight-saving launch moment produces correct local dates wo
     assert.ok(f.local.textContent.includes(date), zone + " date");
     assert.ok(f.local.textContent.includes(time), zone + " time");
     assert.equal(f.local.dateTime, "2026-11-27T23:30:00Z");
-    assert.deepEqual(f.values.map(x => x.textContent), ["01d 00h 00m 00s", "01d 00h 00m 00s"]);
+    assert.deepEqual(f.values.map(x => x.textContent), ["1 day to launch", "1 day to launch"]);
     assert.equal(f.hint.hidden, false);
     assert.ok(f.badges[0].attributes["aria-label"].includes(f.local.textContent));
   }
@@ -58,24 +58,25 @@ test("one Adelaide daylight-saving launch moment produces correct local dates wo
 
 test("never finishes early or displays negative time", () => {
   const f = fixture("Australia/Adelaide", target - 1);
-  assert.equal(f.values[0].textContent, "00d 00h 00m 01s");
+  assert.equal(f.values[0].textContent, "Less than 1 day");
   f.clock.now = target; f.tick();
-  assert.equal(f.values[0].textContent, "00d 00h 00m 00s");
+  assert.equal(f.values[0].textContent, "0 days to launch");
   f.clock.now += 86400000; f.tick();
-  assert.equal(f.values[0].textContent, "00d 00h 00m 00s");
+  assert.equal(f.values[0].textContent, "0 days to launch");
 });
 
 test("uses the current system clock after missed ticks, sleep and clock corrections", () => {
-  const f = fixture();
-  assert.equal(f.intervals[0].delay, 1000);
+  const f = fixture("Australia/Adelaide", target - 172800000);
+  assert.equal(f.intervals[0].delay, 60000);
+  assert.equal(f.values[0].textContent, "2 days to launch");
   const label = f.badges[0].attributes["aria-label"];
   f.clock.now += 3661000; f.tick();
-  assert.equal(f.values[0].textContent, "00d 22h 58m 59s");
-  assert.equal(f.badges[0].attributes["aria-label"], label, "ticking seconds do not change the accessible launch label");
-  f.clock.now -= 1000; f.tick();
-  assert.equal(f.values[0].textContent, "00d 22h 59m 00s");
+  assert.equal(f.values[0].textContent, "1 day to launch");
+  assert.equal(f.badges[0].attributes["aria-label"], label, "day updates do not change the accessible launch label");
+  f.clock.now -= 86400000; f.tick();
+  assert.equal(f.values[0].textContent, "2 days to launch");
   f.clock.now = target - 5000; f.events.visibilitychange();
-  assert.equal(f.values[0].textContent, "00d 00h 00m 05s");
+  assert.equal(f.values[0].textContent, "Less than 1 day");
 });
 
 test("refreshes local formatting when the visitor changes time zones and returns", () => {
@@ -83,9 +84,9 @@ test("refreshes local formatting when the visitor changes time zones and returns
   f.clock.zone = "America/New_York"; f.events.focus();
   assert.ok(f.local.textContent.includes("Friday"));
   assert.ok(f.local.textContent.includes("6:30"));
-  assert.equal(f.values[0].textContent, "01d 00h 00m 00s");
-  f.clock.now = target - 123000; f.events.pageshow();
-  assert.equal(f.values[0].textContent, "00d 00h 02m 03s");
+  assert.equal(f.values[0].textContent, "1 day to launch");
+  f.clock.now = target - 172800001; f.events.pageshow();
+  assert.equal(f.values[0].textContent, "2 days to launch");
 });
 
 test("does not start a timer on pages without a launch display", () => {
