@@ -32,6 +32,11 @@
 .command-trigger{display:block;min-width:0;overflow-wrap:anywhere;font-size:.87rem;font-weight:760;color:#c8b8ff}
 .command-card p{font-size:.79rem;line-height:1.5;margin:9px 0 0;color:#afbdd7}
 .commands-empty{margin:22px 0;padding:26px;border:1px dashed #657396;border-radius:10px;text-align:center}
+.command-card a{color:#c8b8ff;text-decoration:underline;text-underline-offset:3px}
+.commands-help{margin-top:24px;padding:18px 20px;border:1px solid rgba(146,165,210,.22);border-radius:13px;background:#111a2d}
+.commands-help summary{cursor:pointer;color:#c8b8ff;font-weight:700;font-size:.9rem}
+.commands-help p{font-size:.86rem;line-height:1.7;margin:14px 0 0}
+.commands-help code{overflow-wrap:anywhere}
 .command-card[hidden],.commands-group[hidden],.commands-empty[hidden]{display:none!important}
 .commands-endnote{margin-top:65px;padding:33px 38px;border-radius:16px;border:1px solid rgba(143,135,214,.28);background:radial-gradient(ellipse at 100% 100%,rgba(91,75,170,.21),transparent 58%),#141c34}
 .commands-endnote h2{font-size:1.85rem;margin:0 0 11px}

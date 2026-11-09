@@ -29,6 +29,10 @@
   if (year) year.textContent = String(new Date().getFullYear());
 
   const search = document.getElementById("commands-search");
+  const replyHelp = document.getElementById("auto-replies-help");
+  document.querySelectorAll('a[href="#auto-replies-help"]').forEach(link => {
+    link.addEventListener("click", () => { if (replyHelp) replyHelp.open = true; });
+  });
   const results = document.getElementById("commands-results");
   const empty = document.getElementById("commands-empty");
   const groups = [...document.querySelectorAll(".commands-group")];
