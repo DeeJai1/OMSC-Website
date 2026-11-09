@@ -1,0 +1,13 @@
+.launch-countdown-copy{display:grid;gap:5px}
+.launch-countdown-value{display:block;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-variant-numeric:tabular-nums;white-space:nowrap;color:#c8b8ff;font-size:.88rem;letter-spacing:.025em}
+.launch-countdown-value:empty{display:none}
+.nav-download[data-launch-countdown]{flex-direction:column;justify-content:center;gap:3px;min-width:158px;line-height:1.25;text-align:center;padding:10px 13px;flex-shrink:0}
+.nav-download .launch-countdown-value{font-size:.7rem;letter-spacing:0}
+.launch-coming-soon[data-launch-countdown],.launch-download-tag[data-launch-countdown]{line-height:1.3;gap:12px}
+.launch-local-release{margin:16px 0 0;font-size:.82rem;line-height:1.7;color:#b4c2de}
+.launch-local-release time{font-weight:650;color:#e0e7f8}
+.launch-local-hint{display:block;font-size:.75rem;color:#92a3c2}
+.launch-local-hint[hidden]{display:none}
+.download-content .launch-local-release{font-size:.9rem}
+@media(min-width:801px) and (max-width:1100px){.site-nav{gap:16px}.nav-shell{gap:20px}}
+@media(max-width:520px){.launch-countdown-copy{text-align:center}.launch-local-release{font-size:.8rem}.nav-download .launch-countdown-value{font-size:.85rem}}

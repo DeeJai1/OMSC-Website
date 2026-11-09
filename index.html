@@ -14,6 +14,8 @@
   <link rel="icon" href="assets/omsc-favicon.png" type="image/png">
   <link rel="stylesheet" href="styles.css?v=a11y-2">
   <script defer src="main.js?v=a11y-1"></script>
+  <link rel="stylesheet" href="/launch-countdown.css?v=launch-1">
+  <script defer src="/launch-countdown.js?v=launch-1"></script>
   <title>Your stream has enough moving parts already. | OldMan Stream Companion</title>
 </head>
 <body>
@@ -32,7 +34,7 @@
         <a href="#community">Community</a>
         <a href="/beta/">Beta Access</a>
         <a href="#faq">FAQ</a>
-        <a class="nav-download" href="#download">Coming Soon</a>
+        <a class="nav-download" href="#download" data-launch-countdown><span>Coming Soon</span><span class="launch-countdown-value" aria-hidden="true"></span></a>
       </nav>
     </div>
   </header>
@@ -47,8 +49,9 @@
           <p class="hero-lede">Free. Local. Your computer. Your stream. Your tools. Your data.<br>Native Twitch chat and commands. No monthly subscription.</p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="#features">Explore features <span aria-hidden="true">↗</span></a>
-            <span class="launch-coming-soon" role="status"><span class="launch-coming-soon-dot" aria-hidden="true"></span> Download coming soon</span>
+            <span class="launch-coming-soon" role="status" data-launch-countdown><span class="launch-coming-soon-dot" aria-hidden="true"></span><span class="launch-countdown-copy"><span>Download coming soon</span><span class="launch-countdown-value" aria-hidden="true"></span></span></span>
           </div>
+          <p class="launch-local-release">Public launch: <time data-launch-local datetime="2026-11-27T23:30:00Z">Saturday 28 November 2026, 10:00 am Adelaide (ACDT)</time><span class="launch-local-hint" data-launch-local-hint hidden>Shown in your local time.</span></p>
           <div class="hero-points" aria-label="Key information"><span><span class="point-icon">✓</span> Runs locally</span><span><span class="point-icon">✓</span> No monthly subscription</span><span><span class="point-icon">✓</span> Configurable modules</span></div>
         </div>
         <div class="hero-display">
@@ -205,7 +208,7 @@
       </details>
     </div></div></section>
 
-    <section id="download" class="download-section"><div class="container download-shell"><div class="download-decoration download-decoration-left" aria-hidden="true"></div><div class="download-decoration download-decoration-right" aria-hidden="true"></div><div class="download-content"><span class="eyebrow">PUBLIC WINDOWS RELEASE</span><h2>OMSC public download</h2><p>We're preparing the public Windows release of OldMan Stream Companion. The app will be free to use, run locally on your computer, and have no monthly subscription.</p><div class="download-actions"><span class="launch-download-tag" role="status"><span class="launch-coming-soon-dot" aria-hidden="true"></span> Windows download · Coming Soon</span><a class="btn btn-outline" href="https://discord.gg/SG4fTGx7cP" target="_blank" rel="noopener noreferrer">Get updates on Discord <span aria-hidden="true">↗</span></a></div><p class="release-note">Public downloads will be linked here when the official stable release distribution is ready. Beta participation is separate: <a href="/beta/">request beta access</a>.</p></div></div></section>
+    <section id="download" class="download-section"><div class="container download-shell"><div class="download-decoration download-decoration-left" aria-hidden="true"></div><div class="download-decoration download-decoration-right" aria-hidden="true"></div><div class="download-content"><span class="eyebrow">PUBLIC WINDOWS RELEASE</span><h2>OMSC public download</h2><p>We're preparing the public Windows release of OldMan Stream Companion. The app will be free to use, run locally on your computer, and have no monthly subscription.</p><p class="launch-local-release">Public launch: <time data-launch-local datetime="2026-11-27T23:30:00Z">Saturday 28 November 2026, 10:00 am Adelaide (ACDT)</time><span class="launch-local-hint" data-launch-local-hint hidden>Shown in your local time.</span></p><div class="download-actions"><span class="launch-download-tag" role="status" data-launch-countdown><span class="launch-coming-soon-dot" aria-hidden="true"></span><span class="launch-countdown-copy"><span>Windows download · Coming Soon</span><span class="launch-countdown-value" aria-hidden="true"></span></span></span><a class="btn btn-outline" href="https://discord.gg/SG4fTGx7cP" target="_blank" rel="noopener noreferrer">Get updates on Discord <span aria-hidden="true">↗</span></a></div><p class="release-note">Public downloads will be linked here when the official stable release distribution is ready. Beta participation is separate: <a href="/beta/">request beta access</a>.</p></div></div></section>
   </main>
   <footer class="footer"><div class="container footer-main"><div class="footer-brand"><div class="brand"><span class="brand-mark" aria-hidden="true"></span><span class="brand-wordmark"><strong>OldMan</strong><small>Stream Companion</small></span></div><p>Free. Local. Your computer. Your stream. Your tools. Your data.</p></div><nav aria-label="Footer navigation"><a href="#features">Features</a><a href="#preview">Previews</a><a href="/commands/">Commands</a><a href="#faq">FAQ</a><a href="/beta/">Beta Access</a><a href="#download">Coming Soon</a><a href="https://discord.gg/SG4fTGx7cP" target="_blank" rel="noopener noreferrer">Discord</a></nav></div><div class="container footer-bottom"><span>© <span id="year">2026</span> OldMan Stream Companion.</span><span>Website v1 · Made for streamers</span></div></footer>
 </body>

@@ -17,6 +17,8 @@ jobs:
           node-version: '22'
       - name: Validate public pages, accessibility and launch safeguards
         run: node tests/site-native-preview.test.cjs
+      - name: Validate launch countdown, local time zones and clock changes
+        run: node --test tests/launch-countdown.test.cjs
       - name: Validate website JavaScript syntax
         shell: pwsh
         run: |
