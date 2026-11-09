@@ -25,7 +25,7 @@ assert.doesNotMatch(commands, /Some event-driven commands still await native mig
 
 const commandCss = read('commands/commands.css');
 const commandJs = read('commands/commands.js');
-assert.equal((commands.match(/<article class="command-card">/g) || []).length, 24);
+assert.equal((commands.match(/<article class="command-card">/g) || []).length, 25);
 assert.match(commands, /These are example command names, not guaranteed chat triggers/);
 assert.match(commands, /Streamers can change the prefix, rename or disable commands/);
 assert.doesNotMatch(commands, /class="command-copy"|data-copy=|>Copy<\/button>/);

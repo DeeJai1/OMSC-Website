@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#090e1b">
-  <meta name="description" content="Browse the 24 built-in OldMan Stream Companion Twitch chat commands, grouped into viewer and moderator commands.">
+  <meta name="description" content="Browse 25 OldMan Stream Companion Twitch chat commands, including moderator-only Auto-Replies command creation.">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Chat Commands | OldMan Stream Companion">
   <meta property="og:description" content="A clear reference for OMSC viewer and moderator Twitch chat commands.">
@@ -42,7 +42,7 @@
         <span class="eyebrow">TWITCH CHAT COMMANDS</span>
         <h1>Every command.<br><span class="gradient-text">One place.</span></h1>
         <p class="commands-lede">Explore the built-in OMSC chat commands, based on the command reference in the actual application. Use the search below to find what you need.</p>
-        <div class="commands-statline"><span><strong>24</strong> commands</span><span><strong>16</strong> viewer commands</span><span><strong>8</strong> moderator commands</span></div>
+        <div class="commands-statline"><span><strong>25</strong> commands</span><span><strong>16</strong> viewer commands</span><span><strong>9</strong> moderator commands</span></div>
       </div>
     </section>
     <section class="commands-content" aria-label="OMSC command reference">
@@ -51,12 +51,13 @@
           <div>
             <strong>These are example command names, not guaranteed chat triggers.</strong>
             <p>The examples below use the default <code>!music-</code> prefix. Streamers can change the prefix, rename or disable commands in OMSC, so check the commands configured for the channel before using them. Availability also depends on enabled modules. Song Requests can instead use Twitch Channel Points.</p>
+            <p>The Auto-Replies example uses <code>!</code> for clarity. It also follows the channel's configured prefix: with <code>!music-</code>, use <code>!music-addcommand</code>.</p>
           </div>
         </div>
         <div class="commands-toolbar">
           <label for="commands-search">Find a command</label>
           <input id="commands-search" type="search" placeholder="Search commands or descriptions…" autocomplete="off" spellcheck="false">
-          <p id="commands-results" role="status" aria-live="polite">Showing all 24 commands.</p>
+          <p id="commands-results" role="status" aria-live="polite">Showing all 25 commands.</p>
         </div>
         <section class="commands-group" aria-labelledby="commands-everyone">
           <div class="commands-group-head"><div><span class="eyebrow">EVERYONE</span><h2 id="commands-everyone">Viewer Commands</h2><p>Commands available to viewers by default.</p></div><span class="commands-count">16 commands</span></div>
@@ -160,8 +161,17 @@
           </div>
         </section>
         <section class="commands-group" aria-labelledby="commands-mod">
-          <div class="commands-group-head"><div><span class="eyebrow">MODERATOR</span><h2 id="commands-mod">Moderator / Broadcaster Commands</h2><p>Restricted to moderators and broadcasters by default.</p></div><span class="commands-count">8 commands</span></div>
+          <div class="commands-group-head"><div><span class="eyebrow">MODERATOR</span><h2 id="commands-mod">Moderator / Broadcaster Commands</h2><p>Restricted to moderators and broadcasters by default.</p></div><span class="commands-count">9 commands</span></div>
           <div class="commands-grid">
+          <article class="command-card">
+            <div class="command-card-heading">
+              <code class="command-trigger">!addcommand commandname commandresponse</code>
+            </div>
+            <p><strong>Auto-Replies · v0.4.53.beta2+</strong></p>
+            <p>Moderators and the broadcaster can add a saved reply during a stream. Enable Auto-Replies and connect authorised native Twitch chat and a separate bot account first.</p>
+            <p>Example: <code>!addcommand socials Follow me at example.com</code>. Viewers can then type <code>!socials</code>. New replies allow everyone with a 30-second cooldown.</p>
+            <p>The bot confirms after saving. Existing names are not overwritten; edit replies in OMSC. Use the channel's configured prefix for both commands.</p>
+          </article>
           <article class="command-card">
             <div class="command-card-heading">
               <code class="command-trigger">!music-banartist</code>
