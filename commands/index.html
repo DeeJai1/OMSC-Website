@@ -13,8 +13,8 @@
   <link rel="canonical" href="https://www.oldmanstreamcompanion.com/commands/">
   <link rel="icon" href="/assets/omsc-favicon.png" type="image/png">
   <link rel="stylesheet" href="/styles.css?v=a11y-2">
-  <link rel="stylesheet" href="/commands/commands.css?v=command-help-2">
-  <script defer src="/commands/commands.js?v=command-help-2"></script>
+  <link rel="stylesheet" href="/commands/commands.css?v=command-dialog-3">
+  <script defer src="/commands/commands.js?v=command-dialog-3"></script>
   <title>Chat Commands | OldMan Stream Companion</title>
 </head>
 <body>
@@ -167,7 +167,7 @@
             <div class="command-card-heading">
               <code class="command-trigger">!addcommand</code>
             </div>
-            <p>Add a saved Auto-Reply during a stream. <a href="#auto-replies-help">Usage and example</a>.</p>
+            <p>Add a saved Auto-Reply during a stream. <button type="button" class="command-help-trigger" aria-haspopup="dialog" aria-controls="auto-replies-help">Usage and example</button>.</p>
           </article>
           <article class="command-card">
             <div class="command-card-heading">
@@ -220,12 +220,16 @@
           </div>
         </section>
         <p id="commands-empty" class="commands-empty" hidden>No commands match your search. Try another name or description.</p>
-        <details class="commands-help" id="auto-replies-help">
-          <summary>How to add Auto-Replies during a stream · v0.4.53.beta2+</summary>
+        <dialog class="commands-help" id="auto-replies-help" aria-labelledby="auto-replies-help-title">
+          <div class="commands-help-heading">
+            <h2 id="auto-replies-help-title">Add Auto-Replies during a stream</h2>
+            <form method="dialog"><button class="commands-help-close" autofocus>Close</button></form>
+          </div>
+          <p>Auto-Replies · v0.4.53.beta2+</p>
           <p>Moderators and the broadcaster can use <code>!addcommand commandname commandresponse</code>. Enable Auto-Replies and connect authorised native Twitch chat and a separate bot account first.</p>
           <p>Example: <code>!addcommand socials Follow me at example.com</code>. Viewers can then type <code>!socials</code>. New replies allow everyone with a 30-second cooldown.</p>
           <p>The bot confirms after saving. Existing names are not overwritten; edit replies in OMSC. Use the channel's configured prefix for both commands.</p>
-        </details>
+        </dialog>
         <div class="commands-endnote">
           <h2>Make them your own.</h2>
           <p>Manage command names, prefixes, permissions and enabled commands inside OMSC. The examples on this page are a reference, not a copy-and-paste list of commands guaranteed to work in every channel.</p>

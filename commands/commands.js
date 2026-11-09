@@ -30,9 +30,20 @@
 
   const search = document.getElementById("commands-search");
   const replyHelp = document.getElementById("auto-replies-help");
-  document.querySelectorAll('a[href="#auto-replies-help"]').forEach(link => {
-    link.addEventListener("click", () => { if (replyHelp) replyHelp.open = true; });
+  document.querySelectorAll('[aria-controls="auto-replies-help"]').forEach(button => {
+    button.addEventListener("click", () => {
+      if (!replyHelp || replyHelp.open) return;
+      replyHelp.showModal();
+      document.documentElement.classList.add("command-help-open");
+    });
   });
+  if (replyHelp) {
+    replyHelp.addEventListener("close", () => document.documentElement.classList.remove("command-help-open"));
+    replyHelp.addEventListener("click", event => {
+      const bounds = replyHelp.getBoundingClientRect();
+      if (event.target === replyHelp && (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom)) replyHelp.close();
+    });
+  }
   const results = document.getElementById("commands-results");
   const empty = document.getElementById("commands-empty");
   const groups = [...document.querySelectorAll(".commands-group")];
