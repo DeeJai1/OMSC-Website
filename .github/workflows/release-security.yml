@@ -1,0 +1,36 @@
+name: Refresh public stable scan report
+on:
+  schedule:
+    - cron: '17 * * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['scripts/sync-release-security.py', '.github/workflows/release-security.yml']
+permissions:
+  contents: write
+concurrency:
+  group: public-release-security
+  cancel-in-progress: false
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m unittest discover -s tests -p 'test_release_security.py'
+      - run: python scripts/sync-release-security.py
+      # Cloudflare Pages Git integration deploys the updated main branch.
+      - name: Commit verified public metadata
+        shell: bash
+        run: |
+          if git diff --quiet -- release-security/latest.json; then exit 0; fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add release-security/latest.json
+          git commit -m 'Refresh verified public stable scan report and checksums'
+          git pull --rebase origin main
+          git push origin HEAD:main

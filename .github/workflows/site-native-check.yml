@@ -19,6 +19,11 @@ jobs:
         run: node tests/site-native-preview.test.cjs
       - name: Validate launch countdown, local time zones and clock changes
         run: node --test tests/launch-countdown.test.cjs
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate stable-only scan reports and package tampering rejection
+        run: python -m unittest discover -s tests -p 'test_release_security.py'
       - name: Validate website JavaScript syntax
         shell: pwsh
         run: |

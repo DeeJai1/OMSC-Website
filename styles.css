@@ -316,3 +316,6 @@
 
 /* Increase contrast of the small preview tab numbers on dark panels. */
 .preview-tab span{color:#afc0e2}
+
+/* Public stable scan receipt and readable, selectable file hashes. */
+.release-security-shell{max-width:960px}.release-security-shell h2{margin:12px 0 22px}.release-security-shell p{line-height:1.7}.release-security-shell a{text-decoration:underline;text-underline-offset:3px}.release-checksum{border:1px solid #536076;border-radius:12px;padding:16px;margin:18px 0}.release-checksum code{display:block;overflow-wrap:anywhere;user-select:all}.release-security-shell details{margin:24px 0}.release-security-shell summary{cursor:pointer}.release-security-shell code{overflow-wrap:anywhere}
