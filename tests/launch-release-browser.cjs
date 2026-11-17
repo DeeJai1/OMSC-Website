@@ -19,6 +19,7 @@ const release=()=>({draft:false,prerelease:false,published_at:'2026-11-27T23:00:
   const context=await browser.newContext({viewport:{width:1440,height:1000}});contexts.push(context);const page=await context.newPage();let requests=0;const errors=[];page.on('pageerror',e=>errors.push(e.message));
   await page.clock.install({time:new Date(now)});
   await page.route(endpoint,route=>{requests++;return route.fulfill({status,json:data});});
+  await page.route(endpoint.replace(/latest$/, 'tags/*'),route=>route.fulfill({json:release()}));
   await page.goto(origin);await page.locator('#hero-title').waitFor();
   // Wait for the script's async API check to settle without advancing its retry timer.
   await page.waitForFunction(()=>document.readyState==='complete');
@@ -27,7 +28,12 @@ const release=()=>({draft:false,prerelease:false,published_at:'2026-11-27T23:00:
  try{
   const before=await scenario(release(),target-1000);assert.equal(before.requests(),0);assert(await before.page.locator('#public-launch-banner').isHidden());
   await before.page.clock.runFor(1000);await before.page.locator('#public-launch-banner').waitFor({state:'visible'});
-  assert.equal(before.requests(),1);assert.equal(await before.page.locator('[data-public-installer]').first().getAttribute('href'),release().assets[0].browser_download_url);
+  assert.equal(before.requests(),1);
+  assert.equal(await before.page.locator('.launch-sparks i').first().evaluate(e=>getComputedStyle(e).animationIterationCount),'infinite');
+  await before.page.getByRole('button',{name:'Pause confetti',exact:true}).click();
+  assert.equal(await before.page.locator('.launch-sparks i').first().evaluate(e=>getComputedStyle(e).animationPlayState),'paused');
+  await before.page.getByRole('button',{name:'Resume confetti',exact:true}).click();
+  assert.equal(await before.page.locator('.launch-sparks i').first().evaluate(e=>getComputedStyle(e).animationPlayState),'running');assert.equal(await before.page.locator('[data-public-installer]').first().getAttribute('href'),release().assets[0].browser_download_url);
   assert.equal(await before.page.locator('[data-public-nav]').first().textContent(),'Download OMSC');
   assert.match(await before.page.locator('[data-public-download-title]').textContent(),/1.0.0 is out now/);
   assert(await before.page.locator('[data-launch-pending]').first().isHidden());
@@ -46,6 +52,27 @@ const release=()=>({draft:false,prerelease:false,published_at:'2026-11-27T23:00:
   await later.page.unroute(endpoint);await later.page.route(endpoint,route=>route.fulfill({json:release()}));await later.page.clock.runFor(300000);await later.page.locator('#public-launch-banner').waitFor({state:'visible'});
   await later.page.emulateMedia({reducedMotion:'reduce'});assert.equal(await later.page.locator('.launch-sparks').evaluate(e=>getComputedStyle(e).display),'none');
   await later.page.clock.runFor(300000);assert.equal(await later.page.locator('#public-launch-banner').count(),1);assert.deepEqual(later.errors,[]);
+  // Retire on the exact boundary, including tabs left open or resumed from sleep.
+  await before.page.clock.setFixedTime(new Date(target+7*86400000-1));
+  await before.page.evaluate(()=>window.dispatchEvent(new Event('focus')));
+  assert(await before.page.locator('#public-launch-banner').isVisible());
+  await before.page.clock.setFixedTime(new Date(target+7*86400000));
+  await before.page.evaluate(()=>window.dispatchEvent(new Event('focus')));
+  assert(await before.page.locator('#public-launch-banner').isHidden());
+  assert(await before.page.locator('[data-launch-live]').first().isVisible());
+  const expired=await scenario(release(),target+8*86400000);
+  await expired.page.waitForFunction(()=>document.documentElement.dataset.publicReleased==='true');
+  assert(await expired.page.locator('#public-launch-banner').isHidden());
+  assert(await expired.page.locator('[data-launch-live]').first().isVisible());
+  const patchRelease=JSON.parse(JSON.stringify(release()).replaceAll('1.0.0','1.0.1'));
+  patchRelease.published_at=new Date(target+6*86400000).toISOString();
+  const patch=await scenario(patchRelease,target+8*86400000);
+  await patch.page.waitForFunction(()=>document.documentElement.dataset.publicReleased==='true');
+  assert(await patch.page.locator('#public-launch-banner').isHidden(),'a later patch never restarts launch week');
+  const delayedRelease=release();delayedRelease.published_at=new Date(target+86400000).toISOString();
+  const delayed=await scenario(delayedRelease,target+7*86400000);
+  await delayed.page.locator('#public-launch-banner').waitFor({state:'visible'});
+  console.log('PASS loop/pause, exact one-week expiry, persistent downloads, late publication and patch-release anchor.');
   console.log('PASS launch release: both gates, exact countdown transition, stable installer validation, invalid/draft/beta/missing releases, delayed publication retry, no stale copy, five responsive widths and reduced motion.');
  }finally{await browser.close();await new Promise(resolve=>server.close(resolve));}
 })().catch(error=>{console.error(error);process.exitCode=1;});
