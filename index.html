@@ -15,8 +15,10 @@
   <link rel="stylesheet" href="styles.css?v=a11y-2">
   <script defer src="main.js?v=a11y-1"></script>
   <script defer src="/release-security.js?v=1"></script>
-  <link rel="stylesheet" href="/launch-countdown.css?v=launch-days-2">
-  <script defer src="/launch-countdown.js?v=launch-days-2"></script>
+  <link rel="stylesheet" href="/launch-countdown.css?v=launch-release-1">
+  <script defer src="/launch-countdown.js?v=launch-release-1"></script>
+  <link rel="stylesheet" href="/launch-release.css?v=1">
+  <script defer src="/launch-release.js?v=1"></script>
   <title>Your stream has enough moving parts already. | OldMan Stream Companion</title>
 </head>
 <body>
@@ -35,12 +37,25 @@
         <a href="#community">Community</a>
         <a href="/beta/">Beta Access</a>
         <a href="#faq">FAQ</a>
-        <a class="nav-download" href="#download" data-launch-countdown><span>Coming Soon</span><span class="launch-countdown-value" aria-hidden="true"></span></a>
+        <a class="nav-download" href="#download" data-launch-countdown><span data-public-nav>Coming Soon</span><span class="launch-countdown-value" aria-hidden="true"></span></a>
       </nav>
     </div>
   </header>
 
   <main id="main">
+    <section id="public-launch-banner" class="public-launch-banner" aria-labelledby="public-launch-title" hidden>
+      <div class="launch-sparks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="container launch-celebration">
+        <div class="launch-stamp" aria-hidden="true"><span>OMSC</span><strong>1.0</strong><span>LET’S GO LIVE</span></div>
+        <div class="launch-announcement"><p class="launch-release-pill">THE WAIT IS OVER <span aria-hidden="true">✦</span> <span data-public-version>VERSION 1.0.0</span></p>
+          <h2 id="public-launch-title">OMSC IS <span>OUT NOW.</span></h2>
+          <p>Your next great stream starts here. Free Windows tools.<br>Made for your stream. Running on your computer.</p>
+        </div>
+        <div class="launch-banner-actions"><a class="btn launch-get-button" data-public-installer href="https://github.com/DeeJai1/OldMan-Stream-Companion-Public/releases">Get OMSC for free</a><span>WINDOWS 10 / 11 · NO MONTHLY SUBSCRIPTION</span><a class="launch-verification-link" href="#release-security">Scan report &amp; file checksums</a></div>
+      </div>
+    </section>
+    <p id="public-launch-status" class="sr-only" role="status" aria-live="polite"></p>
+
     <section class="hero section-spacing" aria-labelledby="hero-title">
       <div class="hero-ambient hero-ambient-one" aria-hidden="true"></div><div class="hero-ambient hero-ambient-two" aria-hidden="true"></div>
       <div class="container hero-grid">
@@ -50,7 +65,8 @@
           <p class="hero-lede">Free. Local. Your computer. Your stream. Your tools. Your data.<br>Native Twitch chat and commands. No monthly subscription.</p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="#features">Explore features <span aria-hidden="true">↗</span></a>
-            <span class="launch-coming-soon" role="status" data-launch-countdown><span class="launch-coming-soon-dot" aria-hidden="true"></span><span class="launch-countdown-copy"><span>Download coming soon</span><span class="launch-countdown-value" aria-hidden="true"></span></span></span>
+            <span data-launch-pending class="launch-coming-soon" role="status" data-launch-countdown><span class="launch-coming-soon-dot" aria-hidden="true"></span><span class="launch-countdown-copy"><span>Download coming soon</span><span class="launch-countdown-value" aria-hidden="true"></span></span></span>
+            <a class="btn btn-primary" data-public-installer data-launch-live hidden href="https://github.com/DeeJai1/OldMan-Stream-Companion-Public/releases">Download OMSC for free</a>
           </div>
           <p class="launch-local-release">Public launch: <time data-launch-local datetime="2026-11-27T23:30:00Z">Saturday 28 November 2026, 10:00 am Adelaide (ACDT)</time><span class="launch-local-hint" data-launch-local-hint hidden>Shown in your local time.</span></p>
           <div class="hero-points" aria-label="Key information"><span><span class="point-icon">✓</span> Runs locally</span><span><span class="point-icon">✓</span> No monthly subscription</span><span><span class="point-icon">✓</span> Configurable modules</span></div>
@@ -165,7 +181,7 @@
         <summary class="faq-category-summary"><span>General & Getting Started</span></summary>
         <div class="faq-category-questions">
         <details><summary>What is OldMan Stream Companion?</summary><p>OMSC is a Windows desktop companion for Twitch streamers. It brings together chat commands, OBS integration, Spotify and song requests, custom alerts, shoutouts, raid welcomes, stream credits, analytics and other tools in one application.</p></details>
-        <details><summary>Is OMSC free? Where can I download it?</summary><p>OMSC is designed to be free to use, without a monthly subscription. The official public download section on this website will provide the stable Windows installer when public distribution is enabled. Do not download installers from unofficial links. Beta participation is handled separately through <a href="/beta/">Beta Access</a>.</p></details>
+        <details><summary>Is OMSC free? Where can I download it?</summary><p>OMSC is designed to be free to use, without a monthly subscription. <span data-public-faq>The official public download section on this website will provide the stable Windows installer when public distribution is enabled.</span> Do not download installers from unofficial links. Beta participation is handled separately through <a href="/beta/">Beta Access</a>.</p></details>
         <details><summary>Does OMSC require Streamer.bot?</summary><p>No. OMSC v0.4.50 uses native Twitch connections for its own chat commands and event handling. Streamer.bot is not required for these features. If you previously used Streamer.bot to run the same OMSC commands, disable those duplicate actions to avoid double responses. You can continue using Streamer.bot for unrelated automations.</p></details>
         </div>
       </details>
@@ -209,7 +225,7 @@
       </details>
     </div></div></section>
 
-    <section id="download" class="download-section"><div class="container download-shell"><div class="download-decoration download-decoration-left" aria-hidden="true"></div><div class="download-decoration download-decoration-right" aria-hidden="true"></div><div class="download-content"><span class="eyebrow">PUBLIC WINDOWS RELEASE</span><h2>OMSC public download</h2><p>We're preparing the public Windows release of OldMan Stream Companion. The app will be free to use, run locally on your computer, and have no monthly subscription.</p><p class="launch-local-release">Public launch: <time data-launch-local datetime="2026-11-27T23:30:00Z">Saturday 28 November 2026, 10:00 am Adelaide (ACDT)</time><span class="launch-local-hint" data-launch-local-hint hidden>Shown in your local time.</span></p><div class="download-actions"><span class="launch-download-tag" role="status" data-launch-countdown><span class="launch-coming-soon-dot" aria-hidden="true"></span><span class="launch-countdown-copy"><span>Windows download · Coming Soon</span><span class="launch-countdown-value" aria-hidden="true"></span></span></span><a class="btn btn-outline" href="https://discord.gg/SG4fTGx7cP" target="_blank" rel="noopener noreferrer">Get updates on Discord <span aria-hidden="true">↗</span></a></div><p class="release-note">Public downloads will be linked here when the official stable release distribution is ready. <a href="#release-security">Scan reports &amp; SHA-256 checksums</a>. Beta participation is separate: <a href="/beta/">request beta access</a>.</p></div></div></section>
+    <section id="download" class="download-section"><div class="container download-shell"><div class="download-decoration download-decoration-left" aria-hidden="true"></div><div class="download-decoration download-decoration-right" aria-hidden="true"></div><div class="download-content"><span class="eyebrow">PUBLIC WINDOWS RELEASE</span><h2 data-public-download-title>OMSC public download</h2><p data-public-download-copy>We're preparing the public Windows release of OldMan Stream Companion. The app will be free to use, run locally on your computer, and have no monthly subscription.</p><p class="launch-local-release">Public launch: <time data-launch-local datetime="2026-11-27T23:30:00Z">Saturday 28 November 2026, 10:00 am Adelaide (ACDT)</time><span class="launch-local-hint" data-launch-local-hint hidden>Shown in your local time.</span></p><div class="download-actions"><a class="btn btn-primary" data-public-installer data-launch-live hidden href="https://github.com/DeeJai1/OldMan-Stream-Companion-Public/releases">Download OMSC for free</a><span data-launch-pending class="launch-download-tag" role="status" data-launch-countdown><span class="launch-coming-soon-dot" aria-hidden="true"></span><span class="launch-countdown-copy"><span>Windows download · Coming Soon</span><span class="launch-countdown-value" aria-hidden="true"></span></span></span><a class="btn btn-outline" href="https://discord.gg/SG4fTGx7cP" target="_blank" rel="noopener noreferrer">Get updates on Discord <span aria-hidden="true">↗</span></a></div><p class="release-note"><span data-public-download-note>Public downloads will be linked here when the official stable release distribution is ready.</span> <a href="#release-security">Scan reports &amp; SHA-256 checksums</a>. Beta participation is separate: <a href="/beta/">request beta access</a>.</p></div></div></section>
 
     <section id="release-security" class="section-spacing"><div class="container release-security-shell">
       <span class="eyebrow">PUBLIC RELEASE VERIFICATION</span><h2>Scan report &amp; file checksums</h2>
@@ -220,6 +236,6 @@
       <p class="release-note">OMSC does not currently carry a Windows publisher code-signing certificate. Windows SmartScreen may show an “unrecognised app” or unknown-publisher warning. This is separate from a malware detection. A “no threats detected” scan is a dated result, not a guarantee; check any antivirus detection before proceeding.</p>
     </div></section>
   </main>
-  <footer class="footer"><div class="container footer-main"><div class="footer-brand"><div class="brand"><span class="brand-mark" aria-hidden="true"></span><span class="brand-wordmark"><strong>OldMan</strong><small>Stream Companion</small></span></div><p>Free. Local. Your computer. Your stream. Your tools. Your data.</p></div><nav aria-label="Footer navigation"><a href="#features">Features</a><a href="#preview">Previews</a><a href="/commands/">Commands</a><a href="#faq">FAQ</a><a href="/beta/">Beta Access</a><a href="#download">Coming Soon</a><a href="https://discord.gg/SG4fTGx7cP" target="_blank" rel="noopener noreferrer">Discord</a></nav></div><div class="container footer-bottom"><span>© <span id="year">2026</span> OldMan Stream Companion.</span><span>Website v1 · Made for streamers</span></div></footer>
+  <footer class="footer"><div class="container footer-main"><div class="footer-brand"><div class="brand"><span class="brand-mark" aria-hidden="true"></span><span class="brand-wordmark"><strong>OldMan</strong><small>Stream Companion</small></span></div><p>Free. Local. Your computer. Your stream. Your tools. Your data.</p></div><nav aria-label="Footer navigation"><a href="#features">Features</a><a href="#preview">Previews</a><a href="/commands/">Commands</a><a href="#faq">FAQ</a><a href="/beta/">Beta Access</a><a href="#download" data-public-nav>Coming Soon</a><a href="https://discord.gg/SG4fTGx7cP" target="_blank" rel="noopener noreferrer">Discord</a></nav></div><div class="container footer-bottom"><span>© <span id="year">2026</span> OldMan Stream Companion.</span><span>Website v1 · Made for streamers</span></div></footer>
 </body>
 </html>

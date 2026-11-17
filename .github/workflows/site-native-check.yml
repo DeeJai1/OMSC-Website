@@ -32,3 +32,18 @@ jobs:
             node --check $script.FullName
             if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           }
+
+  launch-browser:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Verify release gates, release-day transition and responsive celebration
+        run: |
+          npm install --prefix "$RUNNER_TEMP/launch-browser" --no-save --no-package-lock playwright@1.58.2
+          export NODE_PATH="$RUNNER_TEMP/launch-browser/node_modules"
+          export CHROMIUM_PATH="$(node -e "process.stdout.write(require('playwright').chromium.executablePath())")"
+          "$RUNNER_TEMP/launch-browser/node_modules/.bin/playwright" install --with-deps chromium
+          node tests/launch-release-browser.cjs

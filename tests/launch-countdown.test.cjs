@@ -60,9 +60,9 @@ test("never finishes early or displays negative time", () => {
   const f = fixture("Australia/Adelaide", target - 1);
   assert.equal(f.values[0].textContent, "Less than 1 day");
   f.clock.now = target; f.tick();
-  assert.equal(f.values[0].textContent, "0 days to launch");
+  assert.equal(f.values[0].textContent, "Awaiting public release");
   f.clock.now += 86400000; f.tick();
-  assert.equal(f.values[0].textContent, "0 days to launch");
+  assert.equal(f.values[0].textContent, "Awaiting public release");
 });
 
 test("uses the current system clock after missed ticks, sleep and clock corrections", () => {
