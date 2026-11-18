@@ -320,3 +320,6 @@
 
 /* Public stable scan receipt and readable, selectable file hashes. */
 .release-security-shell{max-width:960px}.release-security-shell h2{margin:12px 0 22px}.release-security-shell p{line-height:1.7}.release-security-shell a{text-decoration:underline;text-underline-offset:3px}.release-checksum{border:1px solid #536076;border-radius:12px;padding:16px;margin:18px 0}.release-checksum code{display:block;overflow-wrap:anywhere;user-select:all}.release-security-shell details{margin:24px 0}.release-security-shell summary{cursor:pointer}.release-security-shell code{overflow-wrap:anywhere}
+
+/* A permanent thank-you to the people who helped shape OMSC. */
+.beta-thanks{padding-top:24px}.beta-thanks-panel{display:flex;align-items:flex-start;gap:22px;padding:28px 32px;border:1px solid #b99a6240;border-radius:16px;background:linear-gradient(115deg,#d2a34d0b,#8b6be90b)}.beta-thanks-star{flex-shrink:0;font-size:2rem;line-height:1.25;color:#f2d68e}.beta-thanks .eyebrow{font-size:.62rem;color:#f2d68e}.beta-thanks h2{font-size:1.35rem;margin:8px 0 10px;letter-spacing:-.03em}.beta-thanks p{font-size:.88rem;line-height:1.85;margin:0;max-width:940px;color:#b5c1d8}@media(max-width:520px){.beta-thanks-panel{padding:23px 20px;gap:14px}.beta-thanks-star{font-size:1.4rem}.beta-thanks h2{font-size:1.15rem}.beta-thanks p{font-size:.82rem}}
