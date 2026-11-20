@@ -15,9 +15,10 @@ const release=()=>({draft:false,prerelease:false,published_at:'2026-11-27T23:00:
  await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));const origin='http://127.0.0.1:'+server.address().port;
  const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||'/usr/bin/chromium',args:['--no-sandbox']});
  const contexts=[];
- async function scenario(data,now=target+1000,status=200){
+ async function scenario(data,now=target+1000,status=200,mirror={status:'pending'}){
   const context=await browser.newContext({viewport:{width:1440,height:1000}});contexts.push(context);const page=await context.newPage();let requests=0;const errors=[];page.on('pageerror',e=>errors.push(e.message));
   await page.clock.install({time:new Date(now)});
+  await page.route('https://omsc-public-downloads.mattshoemark.workers.dev/latest.json',route=>route.fulfill({json:mirror,headers:{'access-control-allow-origin':'*'}}));
   await page.route(endpoint,route=>{requests++;return route.fulfill({status,json:data});});
   await page.route(endpoint.replace(/latest$/, 'tags/*'),route=>route.fulfill({json:release()}));
   await page.goto(origin);await page.locator('#hero-title').waitFor();
@@ -72,6 +73,32 @@ const release=()=>({draft:false,prerelease:false,published_at:'2026-11-27T23:00:
   const delayedRelease=release();delayedRelease.published_at=new Date(target+86400000).toISOString();
   const delayed=await scenario(delayedRelease,target+7*86400000);
   await delayed.page.locator('#public-launch-banner').waitFor({state:'visible'});
+  const mirrorOrigin='https://omsc-public-downloads.mattshoemark.workers.dev',installer=release().assets[0];
+  const mirror={schemaVersion:1,status:'available',version:'1.0.0',publishedAt:release().published_at,firstPublishedAt:release().published_at,releaseUrl:release().html_url,
+    installer:{name:installer.name,size:installer.size,sha256:'a'.repeat(64),url:installer.browser_download_url,mirrorUrl:mirrorOrigin+'/releases/1.0.0/'+installer.name,mirrorChecksumUrl:mirrorOrigin+'/releases/1.0.0/'+installer.name+'.sha256'},
+    scan:{result:'no-threats-detected',completedAt:release().published_at,scanner:{name:'Microsoft Defender Antivirus',engineVersion:'1',signatureVersion:'2'},
+      reportUrl:mirrorOrigin+'/releases/1.0.0/OldManStreamCompanion-Security-Scan-v1.0.0.json',readableReportUrl:mirrorOrigin+'/releases/1.0.0/OldManStreamCompanion-Security-Scan-v1.0.0.md'}};
+  const blocked=await scenario(null,target+1000,403,mirror);
+  await blocked.page.locator('[data-public-mirror]').waitFor({state:'visible'});
+  assert.equal(blocked.requests(),0,'GitHub access is unnecessary when the verified mirror is available');
+  assert.equal(await blocked.page.locator('[data-public-installer]').last().getAttribute('href'),installer.browser_download_url);
+  assert.equal(await blocked.page.locator('[data-public-mirror]').getAttribute('href'),mirror.installer.mirrorUrl);
+  await blocked.page.locator('#release-security-details code').waitFor();
+  assert.equal(await blocked.page.locator('#release-security-details code').textContent(),mirror.installer.sha256);
+  assert.equal(await blocked.page.getByRole('link',{name:'Read scan report',exact:true}).getAttribute('href'),mirror.scan.readableReportUrl);
+  for(const width of [1440,768,390,320]){await blocked.page.setViewportSize({width,height:1000});assert(await blocked.page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'mirror overflow at '+width);}
+  assert.deepEqual(blocked.errors,[]);
+  const mirrorBefore=await scenario(null,target-1000,403,mirror);
+  assert(await mirrorBefore.page.locator('[data-public-mirror]').isHidden());
+  await mirrorBefore.page.clock.runFor(1000);await mirrorBefore.page.locator('[data-public-mirror]').waitFor({state:'visible'});
+  const foreign=structuredClone(mirror);foreign.installer.mirrorUrl='https://evil.example/setup.exe';
+  const invalidMirror=await scenario(null,target+1000,403,foreign);await invalidMirror.page.clock.runFor(1000);
+  assert(await invalidMirror.page.locator('[data-public-mirror]').isHidden());
+  const arriving=await scenario(release());await arriving.page.locator('[data-launch-live]').first().waitFor({state:'visible'});
+  assert(await arriving.page.locator('[data-public-mirror]').isHidden());
+  await arriving.page.unroute(mirrorOrigin+'/latest.json');await arriving.page.route(mirrorOrigin+'/latest.json',route=>route.fulfill({json:mirror,headers:{'access-control-allow-origin':'*'}}));
+  await arriving.page.clock.runFor(300000);await arriving.page.locator('[data-public-mirror]').waitFor({state:'visible'});
+  console.log('PASS GitHub-blocked mirror downloads, same-version hashes/reports, pending/foreign mirrors, late mirror readiness and responsive widths.');
   console.log('PASS loop/pause, exact one-week expiry, persistent downloads, late publication and patch-release anchor.');
   console.log('PASS launch release: both gates, exact countdown transition, stable installer validation, invalid/draft/beta/missing releases, delayed publication retry, no stale copy, five responsive widths and reduced motion.');
  }finally{await browser.close();await new Promise(resolve=>server.close(resolve));}

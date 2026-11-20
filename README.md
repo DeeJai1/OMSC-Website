@@ -25,3 +25,40 @@ The gold/purple banner includes a free installer button, a fuller confetti celeb
 No additional site edit is needed on release day for the banner. Publish the stable GitHub release with the correctly named installer. The separate verified scan-report workflow still needs to run after publishing, as described above. Do not publish a public stable installer in advance if it must remain unavailable before launch: the banner's date gate controls this website, not access to files already public on GitHub.
 
 Validation: `node --test tests/launch-countdown.test.cjs`, `node tests/site-native-preview.test.cjs`, `node tests/launch-release-browser.cjs` (Playwright with Chromium), and the Python release-security suite. Browser checks simulate the launch clock and GitHub responses locally; there is no production preview switch that can bypass either gate.
+
+## Direct installer and Cloudflare backup
+
+After both existing launch gates pass, the homepage provides **Download OMSC for
+Windows** (the exact official GitHub installer asset) and **Backup download
+(Cloudflare)**. No GitHub account is required for the primary link. The backup
+button appears only for the same verified stable version as the primary link.
+
+The site first reads public-only metadata from
+`https://omsc-public-downloads.mattshoemark.workers.dev/latest.json`; if that is
+unavailable or pending, it retains the GitHub release check. This allows launch
+and verification details to work for visitors whose networks block GitHub.
+Checksum and scan-report links also have independent Cloudflare-hosted copies.
+There is no beta/private-source fallback. Both buttons stay hidden before launch
+or before a suitable stable release exists. A page opened while the mirror is
+pending rechecks and can enable the backup when it becomes ready.
+
+The separate private-repository **Public stable installer mirror** workflow runs
+hourly and on owner dispatch. It copies only the published stable installer,
+installer checksum and exact matching JSON/Markdown scan reports into the
+separate private R2 bucket `omsc-public-installers`. Installer bytes, successful
+stable scan coverage, checksum and storage readback must match before its latest
+manifest is published. Versioned files are immutable. Do not place any private
+beta packages in this bucket. The new public download Worker has no beta binding
+or publishing credential and supports resumable downloads.
+
+At release, publish the reviewed public stable release with the required scan
+reports and installer `.sha256`, then dispatch the private mirror workflow in
+`sync` mode immediately. Verify its version/hash and both download links before
+announcing availability. The hourly job subsequently refreshes it automatically.
+No release is created or published by this setup. A scan/sync failure keeps the
+previous verified copy and does not advertise an unverified replacement.
+
+GitHub asset download counters cover the primary downloads only. This mirror
+adds no country tracking, visitor identifiers or claim that GitHub counts include
+Cloudflare transfers. A future combined download total would need a separate
+aggregate mirror counter.

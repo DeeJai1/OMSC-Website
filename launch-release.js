@@ -7,7 +7,7 @@
   const repository = "https://github.com/DeeJai1/OldMan-Stream-Companion-Public";
   const endpoint = "https://api.github.com/repos/DeeJai1/OldMan-Stream-Companion-Public/releases/latest";
   const celebrationDuration = 7 * 86400000;
-  let checking = false, released = false, nextCheck = 0, celebrationEndsAt = 0;
+  let checking = false, released = false, mirrorReady = false, nextCheck = 0, celebrationEndsAt = 0;
   const confettiToggle = document.getElementById("confetti-toggle");
   confettiToggle.addEventListener("click", () => {
     const paused = banner.dataset.confettiPaused !== "true";
@@ -21,6 +21,7 @@
   }
 
   async function originalLaunchAt(release, signal) {
+    if (release.firstPublishedAt) return Math.max(launchAt, release.firstPublishedAt);
     if (release.version === "1.0.0") return Math.max(launchAt, release.publishedAt);
     // Later maintenance releases must not restart the original launch week.
     for (const tag of ["v1.0.0", "1.0.0"]) {
@@ -48,11 +49,17 @@
   }
 
   function celebrate(release, firstReleasedAt) {
-    if (released || Date.now() < launchAt) return;
+    if (Date.now() < launchAt) return;
     released = true;
     celebrationEndsAt = firstReleasedAt === null ? 0 : firstReleasedAt + celebrationDuration;
     document.documentElement.dataset.publicReleased = "true";
     for (const link of document.querySelectorAll("[data-public-installer]")) link.href = release.url;
+    mirrorReady = Boolean(release.mirrorUrl);
+    for (const link of document.querySelectorAll("[data-public-mirror]")) {
+      link.hidden = !mirrorReady;
+      if (mirrorReady) link.href = release.mirrorUrl;
+    }
+    for (const note of document.querySelectorAll("[data-public-mirror-note]")) note.hidden = !mirrorReady;
     for (const node of document.querySelectorAll("[data-public-version]")) node.textContent = "VERSION " + release.version;
     for (const node of document.querySelectorAll("[data-launch-pending], .launch-local-release")) node.hidden = true;
     for (const node of document.querySelectorAll("[data-launch-live]")) node.hidden = false;
@@ -72,12 +79,19 @@
 
   async function check() {
     updateCelebration();
-    if (released || checking || Date.now() < launchAt || Date.now() < nextCheck || document.hidden) return;
+    if ((released && mirrorReady) || checking || Date.now() < launchAt || Date.now() < nextCheck || document.hidden) return;
     checking = true;
     nextCheck = Date.now() + 300000;
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 10000);
     try {
+      const mirror = await window.OMSCReleaseDownloads.readMirror();
+      if (mirror) {
+        const release = {version:mirror.version,url:mirror.installer.url,mirrorUrl:mirror.installer.mirrorUrl,
+          publishedAt:Date.parse(mirror.publishedAt),firstPublishedAt:Date.parse(mirror.firstPublishedAt)};
+        celebrate(release, await originalLaunchAt(release, controller.signal));
+        return;
+      }
       const response = await fetch(endpoint, { credentials: "omit", redirect: "error", cache: "no-cache", signal: controller.signal, headers: { Accept: "application/vnd.github+json" } });
       if (!response.ok) return; // Pending, rate-limited or unavailable: never claim a release.
       const release = publicRelease(await response.json());
