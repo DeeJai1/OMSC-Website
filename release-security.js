@@ -3,14 +3,24 @@
   const panel = document.getElementById('release-security-details');
   if (!panel) return;
   try {
-    const response = await fetch('/release-security/latest.json', { cache: 'no-store' });
-    if (!response.ok) throw new Error('Release information unavailable');
-    const data = await response.json();
+    const mirror = await window.OMSCReleaseDownloads.readMirror();
+    let data;
+    if (mirror) {
+      data = {status:'available',version:mirror.version,result:mirror.scan.result,completedAt:mirror.scan.completedAt,
+        scanner:mirror.scan.scanner,readableReportUrl:mirror.scan.readableReportUrl,reportUrl:mirror.scan.reportUrl,
+        releaseUrl:mirror.releaseUrl,packages:[{...mirror.installer,checksumUrl:mirror.installer.mirrorChecksumUrl}]};
+    } else {
+      const response = await fetch('/release-security/latest.json', { cache: 'no-store' });
+      if (!response.ok) throw new Error('Release information unavailable');
+      data = await response.json();
+    }
     if (data.status !== 'available') return;
     if (!/^\d+\.\d+\.\d+$/.test(data.version) || data.result !== 'no-threats-detected') throw new Error('Invalid release');
     const link = (label, url) => {
       const parsed = new URL(url);
-      if (parsed.origin !== 'https://github.com' || !parsed.pathname.startsWith('/DeeJai1/OldMan-Stream-Companion-Public/releases/')) throw new Error('Invalid release link');
+      const github = parsed.origin === 'https://github.com' && parsed.pathname.startsWith('/DeeJai1/OldMan-Stream-Companion-Public/releases/');
+      const backup = parsed.origin === window.OMSCReleaseDownloads.origin && parsed.pathname.startsWith('/releases/'+data.version+'/');
+      if ((!github && !backup) || parsed.search || parsed.hash) throw new Error('Invalid release link');
       const a = document.createElement('a');
       a.textContent = label; a.href = parsed.href;
       return a;
