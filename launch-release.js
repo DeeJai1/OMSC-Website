@@ -1,15 +1,14 @@
 "use strict";
 (() => {
   const banner = document.getElementById("public-launch-banner");
-  if (!banner) return;
-  const launchAt = Date.parse(document.querySelector("[data-launch-local]")?.getAttribute("datetime"));
+  const launchAt = Date.parse(document.querySelector("[data-launch-local]")?.getAttribute("datetime") || document.documentElement.dataset.launchAt);
   if (!Number.isFinite(launchAt)) return;
   const repository = "https://github.com/DeeJai1/OldMan-Stream-Companion-Public";
   const endpoint = "https://api.github.com/repos/DeeJai1/OldMan-Stream-Companion-Public/releases/latest";
   const celebrationDuration = 7 * 86400000;
   let checking = false, released = false, mirrorReady = false, nextCheck = 0, celebrationEndsAt = 0;
   const confettiToggle = document.getElementById("confetti-toggle");
-  confettiToggle.addEventListener("click", () => {
+  confettiToggle?.addEventListener("click", () => {
     const paused = banner.dataset.confettiPaused !== "true";
     banner.dataset.confettiPaused = String(paused);
     confettiToggle.setAttribute("aria-pressed", String(paused));
@@ -17,6 +16,7 @@
   });
 
   function updateCelebration() {
+    if (!banner) return;
     banner.hidden = !released || Date.now() < launchAt || Date.now() >= celebrationEndsAt;
   }
 
@@ -68,13 +68,14 @@
       node.removeAttribute("data-launch-countdown"); node.removeAttribute("aria-label"); node.removeAttribute("title");
       const value = node.querySelector(".launch-countdown-value"); if (value) value.textContent = "";
     }
-    document.querySelector("[data-public-download-title]").textContent = "OMSC " + release.version + " is out now";
-    document.querySelector("[data-public-download-copy]").textContent = "Your stream companion has arrived. Download the free Windows installer, connect your accounts and make it yours. Runs locally. No monthly subscription.";
-    document.querySelector("[data-public-download-note]").textContent = "Download the official stable Windows installer above.";
-    document.querySelector("[data-public-faq]").textContent = "Download the free stable Windows installer from the public download section below.";
+    const setText = (selector, text) => { const node = document.querySelector(selector); if (node) node.textContent = text; };
+    setText("[data-public-download-title]", "OMSC " + release.version + " is out now");
+    setText("[data-public-download-copy]", "Your stream companion has arrived. Download the free Windows installer, connect your accounts and make it yours. Runs locally. No monthly subscription.");
+    setText("[data-public-download-note]", "Download the official stable Windows installer above.");
+    setText("[data-public-faq]", "Download the free stable Windows installer from the public download section below.");
     updateCelebration();
     if (celebrationEndsAt > Date.now()) setTimeout(updateCelebration, celebrationEndsAt - Date.now());
-    document.getElementById("public-launch-status").textContent = "OMSC " + release.version + " is out now. The free Windows download is available.";
+    setText("#public-launch-status", "OMSC " + release.version + " is out now. The free Windows download is available.");
   }
 
   async function check() {

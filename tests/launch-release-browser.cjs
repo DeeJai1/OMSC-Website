@@ -15,13 +15,13 @@ const release=()=>({draft:false,prerelease:false,published_at:'2026-11-27T23:00:
  await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));const origin='http://127.0.0.1:'+server.address().port;
  const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||'/usr/bin/chromium',args:['--no-sandbox']});
  const contexts=[];
- async function scenario(data,now=target+1000,status=200,mirror={status:'pending'}){
+ async function scenario(data,now=target+1000,status=200,mirror={status:'pending'},routePath='/'){
   const context=await browser.newContext({viewport:{width:1440,height:1000}});contexts.push(context);const page=await context.newPage();let requests=0;const errors=[];page.on('pageerror',e=>errors.push(e.message));
   await page.clock.install({time:new Date(now)});
   await page.route('https://omsc-public-downloads.mattshoemark.workers.dev/latest.json',route=>route.fulfill({json:mirror,headers:{'access-control-allow-origin':'*'}}));
   await page.route(endpoint,route=>{requests++;return route.fulfill({status,json:data});});
   await page.route(endpoint.replace(/latest$/, 'tags/*'),route=>route.fulfill({json:release()}));
-  await page.goto(origin);await page.locator('#hero-title').waitFor();
+  await page.goto(origin+routePath);await page.locator(routePath==='/'?'#hero-title':'h1').waitFor();
   // Wait for the script's async API check to settle without advancing its retry timer.
   await page.waitForFunction(()=>document.readyState==='complete');
   return {page,context,errors,requests:()=>requests};
@@ -98,6 +98,16 @@ const release=()=>({draft:false,prerelease:false,published_at:'2026-11-27T23:00:
   assert(await arriving.page.locator('[data-public-mirror]').isHidden());
   await arriving.page.unroute(mirrorOrigin+'/latest.json');await arriving.page.route(mirrorOrigin+'/latest.json',route=>route.fulfill({json:mirror,headers:{'access-control-allow-origin':'*'}}));
   await arriving.page.clock.runFor(300000);await arriving.page.locator('[data-public-mirror]').waitFor({state:'visible'});
+  for(const routePath of ['/commands/','/beta/']) {
+   const pending=await scenario(release(),target-1000,200,{status:'pending'},routePath);
+   assert.equal(pending.requests(),0);assert.match(await pending.page.locator('[data-public-nav]').first().textContent(),/Coming Soon/);
+   await pending.page.clock.runFor(1000);await pending.page.waitForFunction(()=>document.documentElement.dataset.publicReleased==='true');
+   assert.equal(await pending.page.locator('[data-public-nav]').first().textContent(),'Download OMSC');
+   assert.equal(await pending.page.locator('.launch-countdown-value').first().textContent(),'');assert.deepEqual(pending.errors,[]);
+   const beta=await scenario({...release(),prerelease:true},target+1000,200,{status:'pending'},routePath);
+   await beta.page.clock.runFor(1000);assert.notEqual(await beta.page.getAttribute('html','data-public-released'),'true');assert.deepEqual(beta.errors,[]);
+  }
+  console.log('PASS commands and beta page navigation obeys the same clock/public-release gates without a celebration banner.');
   console.log('PASS GitHub-blocked mirror downloads, same-version hashes/reports, pending/foreign mirrors, late mirror readiness and responsive widths.');
   console.log('PASS loop/pause, exact one-week expiry, persistent downloads, late publication and patch-release anchor.');
   console.log('PASS launch release: both gates, exact countdown transition, stable installer validation, invalid/draft/beta/missing releases, delayed publication retry, no stale copy, five responsive widths and reduced motion.');
