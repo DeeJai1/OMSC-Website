@@ -242,7 +242,7 @@ if (alertsAudio) {
   });
   alertsAudio.addEventListener('error', () => {
     if (alertsPlayAudio) alertsPlayAudio.disabled = false;
-    if (alertsAudioStatus) alertsAudioStatus.textContent = 'Audio could not load. Check that the full website package was extracted.';
+    if (alertsAudioStatus) alertsAudioStatus.textContent = 'The sample sound could not load. Refresh the page and try again.';
   });
 }
 if (creditsRotateButton) creditsRotateButton.addEventListener('click', () => {
