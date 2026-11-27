@@ -5,7 +5,7 @@ This repository is the **website**, not the OMSC application source.
 
 Cloudflare Pages configuration: branch main, framework None, build command `exit 0`, output directory `.`.
 
-Public launch is scheduled for Saturday 28 November 2026 at 10:00 am Australia/Adelaide (ACDT), equivalent to `2026-11-27T23:30:00Z`. `launch-countdown.js` uses that one absolute instant; countdowns follow the device clock and release dates use each visitor's system time zone.
+Public launch is active at the owner’s request. Its reference time is the 1.0.0 publication on Saturday 28 November 2026 at 6:04 am Australia/Adelaide (ACDT), equivalent to `2026-11-27T19:34:09Z`. `launch-countdown.js` uses that one absolute instant; countdowns follow the device clock and release dates use each visitor's system time zone.
 
 ## Public scan reports
 
@@ -18,7 +18,7 @@ The launch-day Discord draft is in `docs/discord-public-1.0-announcement.md`. Po
 
 ## Automatic release-day celebration
 
-At the launch instant, the homepage begins checking the latest stable release in the public distribution repository. A top-of-page **“THE WAIT IS OVER. OMSC IS OUT NOW.”** banner appears only after both the clock has reached `2026-11-27T23:30:00Z` and GitHub lists a published stable version 1.0.0 or later with its uploaded, non-empty Windows installer. Drafts, betas, release candidates, missing installers and foreign download links cannot enable it. This uses the public GitHub API without credentials; no beta repository or private data is queried.
+At the launch instant, the homepage begins checking the latest stable release in the public distribution repository. A top-of-page **“THE WAIT IS OVER. OMSC IS OUT NOW.”** banner appears only after both the clock has reached `2026-11-27T19:34:09Z` and GitHub lists a published stable version 1.0.0 or later with its uploaded, non-empty Windows installer. Drafts, betas, release candidates, missing installers and foreign download links cannot enable it. This uses the public GitHub API without credentials; no beta repository or private data is queried.
 
 The gold/purple banner includes a free installer button, a fuller confetti celebration and a verification-section link. Ninety-six confetti pieces loop continuously in staggered waves. Visitors can pause them; reduced-motion visitors see no confetti. The celebration banner retires after seven days, timed from the later of the scheduled launch and the original 1.0.0 publication. Later patches do not restart this week. Regular download links remain available afterward. Navigation, hero, FAQ and download copy switch to the released state together; the announcement is accessible without moving focus or opening a modal. Before launch, the banner is hidden. If the date passes before publication, the countdown says “Awaiting public release”. A page left open checks at the exact scheduled launch instant, then retries every five minutes until a suitable release appears (GitHub outages/rate limits retain the waiting state). Reloading performs a fresh check. The clock uses the visitor's device time, as the countdown does.
 

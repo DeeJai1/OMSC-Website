@@ -1,9 +1,9 @@
 'use strict';
 const {chromium}=require('playwright'),assert=require('node:assert/strict'),http=require('node:http'),fs=require('node:fs'),path=require('node:path');
-const root=path.resolve(__dirname,'..'),target=Date.parse('2026-11-27T23:30:00Z');
+const root=path.resolve(__dirname,'..'),target=Date.parse('2026-11-27T19:34:09Z');
 const repo='https://github.com/DeeJai1/OldMan-Stream-Companion-Public';
 const endpoint='https://api.github.com/repos/DeeJai1/OldMan-Stream-Companion-Public/releases/latest';
-const release=()=>({draft:false,prerelease:false,published_at:'2026-11-27T23:00:00Z',tag_name:'v1.0.0',html_url:repo+'/releases/tag/v1.0.0',assets:[{name:'OldManStreamCompanion-Setup-1.0.0.exe',size:123456,state:'uploaded',browser_download_url:repo+'/releases/download/v1.0.0/OldManStreamCompanion-Setup-1.0.0.exe'}]});
+const release=()=>({draft:false,prerelease:false,published_at:new Date(target-1800000).toISOString(),tag_name:'v1.0.0',html_url:repo+'/releases/tag/v1.0.0',assets:[{name:'OldManStreamCompanion-Setup-1.0.0.exe',size:123456,state:'uploaded',browser_download_url:repo+'/releases/download/v1.0.0/OldManStreamCompanion-Setup-1.0.0.exe'}]});
 (async()=>{
  const csp=fs.readFileSync(path.join(root,'_headers'),'utf8').split('\n').find(l=>l.trim().startsWith('Content-Security-Policy:')).trim().slice('Content-Security-Policy:'.length).trim();
  const server=http.createServer((req,res)=>{

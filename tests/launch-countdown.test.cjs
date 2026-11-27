@@ -5,7 +5,7 @@ const fs = require("node:fs");
 const path = require("node:path");
 const vm = require("node:vm");
 const source = fs.readFileSync(path.join(__dirname, "../launch-countdown.js"), "utf8");
-const target = Date.parse("2026-11-27T23:30:00Z");
+const target = Date.parse("2026-11-27T19:34:09Z");
 
 function fixture(zone = "Australia/Adelaide", now = target - 86400000, empty = false) {
   const clock = { now, zone }, events = {}, intervals = [];
@@ -37,19 +37,19 @@ function fixture(zone = "Australia/Adelaide", now = target - 86400000, empty = f
 
 test("one Adelaide daylight-saving launch moment produces correct local dates worldwide", () => {
   const cases = [
-    ["Australia/Adelaide", "Saturday", "28 November 2026", "10:00"],
-    ["Australia/Sydney", "Saturday", "28 November 2026", "10:30"],
-    ["Australia/Perth", "Saturday", "28 November 2026", "7:30"],
-    ["America/New_York", "Friday", "27 November 2026", "6:30"],
-    ["Europe/London", "Friday", "27 November 2026", "11:30"],
-    ["Asia/Kathmandu", "Saturday", "28 November 2026", "5:15"]
+    ["Australia/Adelaide", "Saturday", "28 November 2026", "6:04"],
+    ["Australia/Sydney", "Saturday", "28 November 2026", "6:34"],
+    ["Australia/Perth", "Saturday", "28 November 2026", "3:34"],
+    ["America/New_York", "Friday", "27 November 2026", "2:34"],
+    ["Europe/London", "Friday", "27 November 2026", "7:34"],
+    ["Asia/Kathmandu", "Saturday", "28 November 2026", "1:19"]
   ];
   for (const [zone, day, date, time] of cases) {
     const f = fixture(zone);
     assert.ok(f.local.textContent.includes(day), zone + " weekday");
     assert.ok(f.local.textContent.includes(date), zone + " date");
     assert.ok(f.local.textContent.includes(time), zone + " time");
-    assert.equal(f.local.dateTime, "2026-11-27T23:30:00Z");
+    assert.equal(f.local.dateTime, "2026-11-27T19:34:09Z");
     assert.deepEqual(f.values.map(x => x.textContent), ["1 day to launch", "1 day to launch"]);
     assert.equal(f.hint.hidden, false);
     assert.ok(f.badges[0].attributes["aria-label"].includes(f.local.textContent));
@@ -83,7 +83,7 @@ test("refreshes local formatting when the visitor changes time zones and returns
   const f = fixture();
   f.clock.zone = "America/New_York"; f.events.focus();
   assert.ok(f.local.textContent.includes("Friday"));
-  assert.ok(f.local.textContent.includes("6:30"));
+  assert.ok(f.local.textContent.includes("2:34"));
   assert.equal(f.values[0].textContent, "1 day to launch");
   f.clock.now = target - 172800001; f.events.pageshow();
   assert.equal(f.values[0].textContent, "2 days to launch");
