@@ -85,7 +85,15 @@ const release=()=>({draft:false,prerelease:false,published_at:new Date(target-18
   assert.equal(await blocked.page.locator('[data-public-mirror]').getAttribute('href'),mirror.installer.mirrorUrl);
   await blocked.page.locator('#release-security-details code').waitFor();
   assert.equal(await blocked.page.locator('#release-security-details code').textContent(),mirror.installer.sha256);
-  assert.equal(await blocked.page.getByRole('link',{name:'Read scan report',exact:true}).getAttribute('href'),mirror.scan.readableReportUrl);
+  const scanButton=blocked.page.getByRole('button',{name:'Read scan result',exact:true});
+  await scanButton.click();const scanDialog=blocked.page.getByRole('dialog');
+  assert(await scanDialog.isVisible());assert.match(await scanDialog.textContent(),/No threats detected/);
+  assert.match(await scanDialog.textContent(),/not publisher-signed/);
+  assert.equal(await scanDialog.locator('code').textContent(),mirror.installer.sha256);
+  assert.equal(await scanDialog.getByRole('link',{name:'Download original scan report'}).getAttribute('href'),mirror.scan.readableReportUrl);
+  for(const width of [1440,390,320]){await blocked.page.setViewportSize({width,height:700});assert(await scanDialog.evaluate(e=>e.scrollWidth<=e.clientWidth),'scan dialog fits at '+width);}
+  await blocked.page.keyboard.press('Escape');assert(await scanDialog.isHidden());assert(await scanButton.evaluate(e=>e===document.activeElement));
+  await scanButton.click();await scanDialog.getByRole('button',{name:'Close scan result'}).click();assert(await scanDialog.isHidden());
   for(const width of [1440,768,390,320]){await blocked.page.setViewportSize({width,height:1000});assert(await blocked.page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'mirror overflow at '+width);}
   assert.deepEqual(blocked.errors,[]);
   const mirrorBefore=await scenario(null,target-1000,403,mirror);
