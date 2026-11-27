@@ -17,7 +17,7 @@ const release=()=>({draft:false,prerelease:false,published_at:new Date(target-18
  const contexts=[];
  async function scenario(data,now=target+1000,status=200,mirror={status:'pending'},routePath='/'){
   const context=await browser.newContext({viewport:{width:1440,height:1000}});contexts.push(context);const page=await context.newPage();let requests=0;const errors=[];page.on('pageerror',e=>errors.push(e.message));
-  await page.clock.install({time:new Date(now)});
+  await page.clock.install({time:new Date(now-1000)});await page.clock.pauseAt(new Date(now));
   await page.route('https://omsc-public-downloads.mattshoemark.workers.dev/latest.json',route=>route.fulfill({json:mirror,headers:{'access-control-allow-origin':'*'}}));
   await page.route(endpoint,route=>{requests++;return route.fulfill({status,json:data});});
   await page.route(endpoint.replace(/latest$/, 'tags/*'),route=>route.fulfill({json:release()}));
