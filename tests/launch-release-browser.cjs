@@ -45,6 +45,15 @@ const release=()=>({draft:false,prerelease:false,published_at:new Date(target-18
    await before.page.screenshot({path:'/tmp/omsc-release-banner-'+width+'.png',fullPage:false});
   }
   assert(await before.page.locator('#public-launch-status').evaluate(e=>e.getBoundingClientRect().width<=1),'live announcement is visually hidden');
+  // The sticky header moves with the viewport, so it must never own #top.
+  for(const width of [1440,390]) {
+   await before.page.setViewportSize({width,height:900});
+   await before.page.evaluate(()=>{document.documentElement.style.scrollBehavior='auto';window.scrollTo(0,document.body.scrollHeight);});
+   assert(await before.page.evaluate(()=>scrollY>500));
+   await before.page.locator('.site-header .brand').click();
+   await before.page.waitForFunction(()=>scrollY===0);
+   assert.equal(await before.page.evaluate(()=>document.getElementById('top').tagName),'BODY');
+  }
   assert.deepEqual(before.errors,[]);
   // Neither the date alone nor a beta, draft or incomplete/foreign installer may launch.
   const variants=[null,{...release(),prerelease:true},{...release(),draft:true},{...release(),tag_name:'v1.0.0-rc.7.8'},{...release(),tag_name:'v0.4.52'},{...release(),assets:[]},{...release(),assets:[{...release().assets[0],browser_download_url:'https://evil.example/setup.exe'}]}];
