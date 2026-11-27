@@ -34,7 +34,7 @@
     open.type = 'button'; open.className = 'scan-report-open'; open.textContent = 'Read scan result';
     const dialog = document.createElement('dialog');
     dialog.className = 'scan-report-dialog'; dialog.setAttribute('aria-labelledby', 'scan-report-title');
-    const heading = document.createElement('h2'); heading.id = 'scan-report-title'; heading.textContent = `Version ${data.version} scan result`;
+    const heading = document.createElement('h2'); heading.tabIndex = -1; heading.setAttribute('autofocus', ''); heading.id = 'scan-report-title'; heading.textContent = `Version ${data.version} scan result`;
     const close = document.createElement('button'); close.type = 'button'; close.className = 'btn btn-outline'; close.textContent = 'Close scan result';
     close.addEventListener('click', () => dialog.close());
     dialog.append(heading, summary.cloneNode(true));
@@ -57,7 +57,7 @@
     const originals = document.createElement('p');
     originals.append(link('Download original scan report', data.readableReportUrl), ' · ', link('Download JSON report', data.reportUrl));
     dialog.append(originals, close);
-    open.addEventListener('click', () => dialog.showModal());
+    open.addEventListener('click', () => { dialog.showModal(); dialog.scrollTop = 0; });
     dialog.addEventListener('close', () => open.focus());
     dialog.addEventListener('click', event => {
       const bounds = dialog.getBoundingClientRect();

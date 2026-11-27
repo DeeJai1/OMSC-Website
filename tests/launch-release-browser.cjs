@@ -17,7 +17,7 @@ const release=()=>({draft:false,prerelease:false,published_at:new Date(target-18
  const contexts=[];
  async function scenario(data,now=target+1000,status=200,mirror={status:'pending'},routePath='/'){
   const context=await browser.newContext({viewport:{width:1440,height:1000}});contexts.push(context);const page=await context.newPage();let requests=0;const errors=[];page.on('pageerror',e=>errors.push(e.message));
-  await page.clock.install({time:new Date(now)});
+  await page.clock.install({time:new Date(now-1000)});await page.clock.pauseAt(new Date(now));
   await page.route('https://omsc-public-downloads.mattshoemark.workers.dev/latest.json',route=>route.fulfill({json:mirror,headers:{'access-control-allow-origin':'*'}}));
   await page.route(endpoint,route=>{requests++;return route.fulfill({status,json:data});});
   await page.route(endpoint.replace(/latest$/, 'tags/*'),route=>route.fulfill({json:release()}));
@@ -45,6 +45,15 @@ const release=()=>({draft:false,prerelease:false,published_at:new Date(target-18
    await before.page.screenshot({path:'/tmp/omsc-release-banner-'+width+'.png',fullPage:false});
   }
   assert(await before.page.locator('#public-launch-status').evaluate(e=>e.getBoundingClientRect().width<=1),'live announcement is visually hidden');
+  // The sticky header moves with the viewport, so it must never own #top.
+  for(const width of [1440,390]) {
+   await before.page.setViewportSize({width,height:900});
+   await before.page.evaluate(()=>{document.documentElement.style.scrollBehavior='auto';window.scrollTo(0,document.body.scrollHeight);});
+   assert(await before.page.evaluate(()=>scrollY>500));
+   await before.page.locator('.site-header .brand').click();
+   await before.page.waitForFunction(()=>scrollY===0);
+   assert.equal(await before.page.evaluate(()=>document.getElementById('top').tagName),'BODY');
+  }
   assert.deepEqual(before.errors,[]);
   // Neither the date alone nor a beta, draft or incomplete/foreign installer may launch.
   const variants=[null,{...release(),prerelease:true},{...release(),draft:true},{...release(),tag_name:'v1.0.0-rc.7.8'},{...release(),tag_name:'v0.4.52'},{...release(),assets:[]},{...release(),assets:[{...release().assets[0],browser_download_url:'https://evil.example/setup.exe'}]}];
@@ -93,7 +102,10 @@ const release=()=>({draft:false,prerelease:false,published_at:new Date(target-18
   assert.equal(await scanDialog.getByRole('link',{name:'Download original scan report'}).getAttribute('href'),mirror.scan.readableReportUrl);
   for(const width of [1440,390,320]){await blocked.page.setViewportSize({width,height:700});assert(await scanDialog.evaluate(e=>e.scrollWidth<=e.clientWidth),'scan dialog fits at '+width);}
   await blocked.page.keyboard.press('Escape');assert(await scanDialog.isHidden());assert(await scanButton.evaluate(e=>e===document.activeElement));
-  await scanButton.click();await scanDialog.getByRole('button',{name:'Close scan result'}).click();assert(await scanDialog.isHidden());
+  await scanButton.click();
+  assert.equal(await scanDialog.evaluate(e=>e.scrollTop),0,'mobile dialog starts at the scan heading');
+  assert(await scanDialog.getByRole('heading').evaluate(e=>e===document.activeElement),'initial focus announces the report heading');
+  await scanDialog.getByRole('button',{name:'Close scan result'}).click();assert(await scanDialog.isHidden());
   for(const width of [1440,768,390,320]){await blocked.page.setViewportSize({width,height:1000});assert(await blocked.page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'mirror overflow at '+width);}
   assert.deepEqual(blocked.errors,[]);
   const mirrorBefore=await scenario(null,target-1000,403,mirror);
