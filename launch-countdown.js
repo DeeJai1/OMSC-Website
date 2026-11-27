@@ -1,8 +1,8 @@
 "use strict";
 (() => {
-  // Saturday 28 November 2026, 10:00 am in Australia/Adelaide (ACDT, UTC+10:30).
-  // Keep one absolute instant: visitors must not count down to 10 am in their own zone.
-  const launchISO = "2026-11-27T23:30:00Z";
+  // Public release: Saturday 28 November 2026, 6:04 am in Australia/Adelaide (ACDT, UTC+10:30).
+  // Keep one absolute instant: visitors must not count down to the launch time in their own zone.
+  const launchISO = "2026-11-27T19:34:09Z";
   const launchAt = Date.parse(launchISO);
   const badges = [...document.querySelectorAll("[data-launch-countdown]")];
   const localDates = [...document.querySelectorAll("[data-launch-local]")];
