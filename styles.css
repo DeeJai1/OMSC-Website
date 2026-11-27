@@ -326,3 +326,14 @@
 
 /* The developer's story: a readable text column, stacked on smaller screens. */
 .about-section{padding-bottom:0}.about-grid{display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr);gap:56px;align-items:start}.about-heading h2{margin:14px 0 0;font-size:clamp(2rem,4vw,3.1rem);line-height:1.12;letter-spacing:-.045em}.about-story{min-width:0;max-width:72ch}.about-story p{margin:0 0 22px;line-height:1.9;color:#b5c1d8;font-size:.96rem}.about-story .about-intro{font-size:1.12rem;color:#e8edf8}.about-story strong{color:#e8edf8}.about-story .about-aim{margin:28px 0 0;padding-left:20px;border-left:3px solid #a48bfa}@media(max-width:800px){.about-grid{grid-template-columns:1fr;gap:26px}.about-story p{font-size:.9rem}.about-story .about-intro{font-size:1.02rem}}
+
+/* Native modal keeps keyboard focus inside the scan result and supports Escape. */
+.scan-report-open{font:inherit;color:var(--accent,#afff45);background:none;border:0;padding:0;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.scan-report-open:focus-visible{outline:2px solid currentColor;outline-offset:5px}
+.scan-report-dialog{box-sizing:border-box;width:min(760px,calc(100% - 32px));max-height:85vh;overflow-y:auto;border:1px solid #536076;border-radius:20px;padding:clamp(20px,4vw,36px);background:#141821;color:#f5f7fa;box-shadow:0 24px 90px #0009}
+.scan-report-dialog::backdrop{background:#05070bdd}
+.scan-report-dialog h2{font-size:clamp(1.4rem,5vw,2rem);margin:0 0 20px}
+.scan-report-dialog p{line-height:1.7}.scan-report-dialog a{color:#afff45;text-decoration:underline;overflow-wrap:anywhere}
+.scan-report-dialog dl{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px 20px;margin:24px 0}
+.scan-report-dialog dt{font-weight:700}.scan-report-dialog dd{margin:0;overflow-wrap:anywhere}
+.scan-report-dialog .release-checksum p{overflow-wrap:anywhere}
