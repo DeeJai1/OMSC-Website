@@ -1,3 +1,39 @@
 {
-  "status": "pending"
+  "status": "available",
+  "version": "1.0.0",
+  "releaseUrl": "https://github.com/DeeJai1/OldMan-Stream-Companion-Public/releases/tag/v1.0.0",
+  "publishedAt": "2026-11-27T19:34:09Z",
+  "completedAt": "2026-11-26T09:01:03.1827872Z",
+  "scanner": {
+    "name": "Microsoft Defender Antivirus",
+    "engineVersion": "1.1.26100.4",
+    "signatureVersion": "1.463.476.0",
+    "signatureUpdatedAt": "2026-11-26T02:31:09.0000000Z",
+    "scanType": "custom",
+    "automaticSampleSubmission": "never-send",
+    "remediationEnabled": false,
+    "archivesScanned": true,
+    "exclusionsIgnored": true
+  },
+  "result": "no-threats-detected",
+  "packages": [
+    {
+      "name": "OldManStreamCompanion-Setup-1.0.0.exe",
+      "size": 122769529,
+      "sha256": "ea9277811652e19b87fda1c2d08ee9473d012a0a116755e4c05d1050e785dbcd",
+      "authenticodeStatus": "NotSigned",
+      "url": "https://github.com/DeeJai1/OldMan-Stream-Companion-Public/releases/download/v1.0.0/OldManStreamCompanion-Setup-1.0.0.exe",
+      "checksumUrl": "https://github.com/DeeJai1/OldMan-Stream-Companion-Public/releases/download/v1.0.0/OldManStreamCompanion-Setup-1.0.0.exe.sha256"
+    },
+    {
+      "name": "OldManStreamCompanion-win-x64-v1.0.0.zip",
+      "size": 156762240,
+      "sha256": "0b4992c0ecce6e96925675a16e8e9900b6d16dc0e631907369cce3ce85d25e0b",
+      "url": "https://github.com/DeeJai1/OldMan-Stream-Companion-Public/releases/download/v1.0.0/OldManStreamCompanion-win-x64-v1.0.0.zip",
+      "checksumUrl": "https://github.com/DeeJai1/OldMan-Stream-Companion-Public/releases/download/v1.0.0/OldManStreamCompanion-win-x64-v1.0.0.zip.sha256"
+    }
+  ],
+  "reportUrl": "https://github.com/DeeJai1/OldMan-Stream-Companion-Public/releases/download/v1.0.0/OldManStreamCompanion-Security-Scan-v1.0.0.json",
+  "readableReportUrl": "https://github.com/DeeJai1/OldMan-Stream-Companion-Public/releases/download/v1.0.0/OldManStreamCompanion-Security-Scan-v1.0.0.md",
+  "fingerprint": "a15fb0e3926067691abb3c6c3739a094fc53e0f5a92e7fb3ffae37bba8766bcf"
 }
